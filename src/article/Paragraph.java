@@ -10,7 +10,12 @@ public enum Paragraph {
     G ("ж"),
     H ("з"),
     I ("и"),
-    J ("к");
+    J ("к"),
+    K ("л"),
+    L ("м"),
+    M ("н"),
+    N ("о"),
+    O ("п");
 
     private String title;
 
