@@ -13,17 +13,21 @@ import java.util.ArrayList;
 
 public class Initializer {
     public final ArrayList<Article> criminalCode = initializeCriminalCode();
+    private ArrayList<Article> tempCriminalCode = new ArrayList<>();
+    private Article currentArticle = new Article();
 
     public ArrayList<Article> initializeCriminalCode() {
-        ArrayList<Article> tempCriminalCode = null;
+
         BufferedReader reader;
         try {
             File f = new File("src/CriminalCode.txt");
             reader = new BufferedReader(new FileReader(f));
             String line = reader.readLine();
-            while (line != null) {
-
+            while (true) {
                 line = reader.readLine();
+                if(line == null){
+                    break;
+                }
                 recognize(line);
             }
             reader.close();
@@ -35,20 +39,44 @@ public class Initializer {
 
 
     private Article recognize(String line) { // распознавание
-        StringBuilder word = new StringBuilder();
-        String keyword = "";
-        StringBuilder object = new StringBuilder();
+        String word = "";
         for (int i = 0; i < line.length(); i++) { //перебираем строчку по символу
             char c = line.charAt(i);
-            while (c != ' ') { //считываем пока не встретим пробел
-                c = line.charAt(i);
-
-                    word.append(c); // добавление символов к слову
-
+            if (c != ' ') {
+                word += c;
+            } else {
+                if (word.equals("Статья")) {
+                    setArticleDescription(i, line);
+                } else {
+                    break;
+                }
             }
-            System.out.println(word);
+        }
+        return currentArticle;
+    }
+
+    private void setArticleDescription(int i, String line) {
+        Article article = new Article();
+        String word = "";
+        int spacecounter = 0;
+        for (int j = i; j < line.length(); j++) { //перебираем строчку по символу
+            char c = line.charAt(j);
+            if (c != ' ') {
+                word += c;
+                System.out.println(word);
+            } else {
+                System.out.println("!!!");
+                if (spacecounter == 0) {
+                    System.out.println(word);
+                    article.setNumber(word);
+                } else {
+                    article.setDescription(word);
+                }
+                spacecounter++;
+            }
 
         }
-    return null;
+
     }
 }
+
