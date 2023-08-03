@@ -1,36 +1,31 @@
 package article;
 
-public enum Paragraph {
-    A ("а"),
-    B ("б"),
-    C ("в"),
-    D ("г"),
-    E ("д"),
-    F ("е"),
-    G ("ж"),
-    H ("з"),
-    I ("и"),
-    J ("к"),
-    K ("л"),
-    L ("м"),
-    M ("н"),
-    N ("о"),
-    O ("п");
+public class Paragraph {
+    private String number;
+    private String description;
 
-    private String title;
 
-    Paragraph(String title) {
-        this.title = title;
+    public String getDescription() {
+        return description;
     }
 
-    public String getTitle() {
-        return title;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 
     @Override
     public String toString() {
-        return "InvestigatorRank{" +
-                "title='" + title + '\'' +
+        return "Paragraph{" +
+                "number='" + number + '\'' +
+                ", description='" + description + '\'' +
                 '}';
     }
 }
