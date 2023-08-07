@@ -40,6 +40,25 @@ public class Initializer {
 
     private Article recognize(String line) { // распознавание
         String word = "";
+        System.out.println(line);
+        int spaceCounter = 0;
+        if (line.charAt(0) == 'С' && line.charAt(1) == 'т' && line.charAt(2) == 'а'){
+            for (int i = 5; i < line.length(); i++) {
+                    char c = line.charAt(i);
+                    if (c != ' ') {
+                        word += c;
+                    } else {
+                        System.out.println("Проверка" + word);
+                    }
+            }
+
+
+        } else if(Character.isDigit(line.charAt(0)) && line.charAt(1) == '.'){
+            System.out.println("часть");
+        } else if(Character.isLetter(line.charAt(0)) && line.charAt(1) == ')'){
+            System.out.println("пункт");
+        }
+        /*
         for (int i = 0; i < line.length(); i++) { //перебираем строчку по символу
             char c = line.charAt(i);
             if (c != ' ') {
@@ -52,6 +71,8 @@ public class Initializer {
                 }
             }
         }
+        */
+
         return currentArticle;
     }
 
@@ -59,23 +80,8 @@ public class Initializer {
         Article article = new Article();
         String word = "";
         int spacecounter = 0;
-        for (int j = i; j < line.length(); j++) { //перебираем строчку по символу
-            char c = line.charAt(j);
-            if (c != ' ') {
-                word += c;
-                System.out.println(word);
-            } else {
-                System.out.println("!!!");
-                if (spacecounter == 0) {
-                    System.out.println(word);
-                    article.setNumber(word);
-                } else {
-                    article.setDescription(word);
-                }
-                spacecounter++;
-            }
 
-        }
+
 
     }
 }
