@@ -2,7 +2,7 @@ package article;
 
 import java.util.ArrayList;
 
-public enum Part {
+public class Part {
     ;
     private String number;
     private String description;

@@ -6,7 +6,7 @@ public class Article {
 
     private String number;
     private String description;
-    private ArrayList <Part> parts;
+    protected ArrayList <Part> parts = new ArrayList<>();
 
     public String getNumber() {
         return number;
