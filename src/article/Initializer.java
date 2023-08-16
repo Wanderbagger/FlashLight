@@ -14,13 +14,23 @@ public class Initializer {
     private Article currentArticle = new Article();
     private Part currentPart = new Part();
     private Paragraph currentParagraph = new Paragraph();
+    private String nextLineType;
 
     public ArrayList<Article> initializeCriminalCode() {
         try {
             List<String> lines = Files.readAllLines(Paths.get("src/CriminalCode.txt"));
-            for (String line: lines) {
-                recognize(line);
+            for (int i = 0; i < lines.size(); i++) {
+                if(lines.get(i).length() > 1) {
+                    if(lines.size() > (i+1)){
+                        nextLineType = chooseType(lines.get(i+1));
+                    } else if (lines.size() == (i+1)){
+                        nextLineType = "статья";
+                    }
+                    recognize(lines.get(i));
+                    System.out.println(nextLineType);
+                }
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -28,17 +38,31 @@ public class Initializer {
     }
 
     private Article recognize(String line) { // распознавание
-        if (line.charAt(0) == 'С' && line.charAt(1) == 'т'){
+        if (chooseType(line).equals("статья")){
             currentArticle = recognizeArticle(line);
-          } else if(Character.isDigit(line.charAt(0)) && line.charAt(1) == '.'){
+            System.out.println(currentArticle);
+        } else if(chooseType(line).equals("часть")){
             currentPart = recognizePart(line);
             System.out.println(currentPart);
-        } else if(Character.isLetter(line.charAt(0)) && line.charAt(1) == ')'){
+        } else if(chooseType(line).equals("параграф")){
             currentParagraph = recognizeParagraph(line);
-
             System.out.println(currentParagraph);
         }
         return currentArticle;
+    }
+
+    private String chooseType (String line) { // распознавание следующей строки
+        if(line.length() < 1){
+            return "";
+        }
+        if (line.charAt(0) == 'С' && line.charAt(1) == 'т'){
+            return "статья";
+        } else if(Character.isDigit(line.charAt(0)) && line.charAt(1) == '.'){
+            return "часть";
+        } else if(Character.isLetter(line.charAt(0)) && line.charAt(1) == ')'){
+            return "параграф";
+        }
+        return "";
     }
 
     private Article recognizeArticle(String line){
@@ -98,4 +122,3 @@ public class Initializer {
     }
 
 }
-
