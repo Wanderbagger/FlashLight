@@ -26,7 +26,7 @@ public class Article {
 
     @Override
     public String toString() {
-        return "Article{" +
+        return "Article{" + '\'' +
                 "number='" + number + '\'' +
                 ", description='" + description + '\'' +
                 ", parts=" + parts +

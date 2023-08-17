@@ -6,7 +6,7 @@ public class Part {
 
     private String number;
     private String description;
-    protected ArrayList <Paragraph> paragraphs;
+    protected ArrayList <Paragraph> paragraphs = new ArrayList<>();
 
 
     public String getDescription() {
