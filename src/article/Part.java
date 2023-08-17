@@ -3,10 +3,10 @@ package article;
 import java.util.ArrayList;
 
 public class Part {
-    ;
+
     private String number;
     private String description;
-    private ArrayList <Paragraph> paragraphs;
+    protected ArrayList <Paragraph> paragraphs;
 
 
     public String getDescription() {
