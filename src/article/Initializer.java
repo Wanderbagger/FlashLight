@@ -13,15 +13,16 @@ public class Initializer {
     private Article currentArticle;
     private Part currentPart = new Part();
     private Paragraph currentParagraph = new Paragraph();
-    private String previousLineType;
+    private String nextLineType;
 
     public void initializeCriminalCode() {
         try {
             List<String> lines = Files.readAllLines(Paths.get("src/CriminalCode.txt"));
             for (int i = 1; i < lines.size(); i++) {
                 if(lines.get(i).length() > 1) {
-                        if(!chooseType(lines.get(i - 1)).equals("ошибка")) {
-                            previousLineType = chooseType(lines.get(i - 1));
+                        if(!chooseType(lines.get(i + 1)).equals("ошибка") && lines.size() > (i + 1)) {
+                            nextLineType = chooseType(lines.get(i + 1));
+                            System.out.println(nextLineType);
                         }
                     recognize(lines.get(i));
                 }
@@ -30,23 +31,19 @@ public class Initializer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println(criminalCode);
+
     }
 
     private Article recognize(String line) { // распознавание
         if (chooseType(line).equals("статья")){
-            if(currentArticle != null){
-                System.out.println(currentArticle);
-            }
             currentArticle = recognizeArticle(line);
+            System.out.println(currentArticle);
         } else if(chooseType(line).equals("часть")){
-            if(previousLineType.equals("параграф")){
-                currentPart.paragraphs.add(currentParagraph);
-            }
-            currentArticle.parts.add(currentPart);
-            currentPart = recognizePart(line);
+                currentPart = recognizePart(line);
+                System.out.println(currentPart);
         } else if(chooseType(line).equals("параграф")){
             currentParagraph = recognizeParagraph(line);
+            System.out.println(currentParagraph);
         }
         return currentArticle;
     }
@@ -71,6 +68,9 @@ public class Initializer {
         String word = "";
         for (int i = 7; i < line.length(); i++) {
             if(line.charAt(i) == ' ' && spacecounter == 0){
+                if(word.charAt(word.length()-1) == '.'){
+                    word = word.substring(0, word.length() - 1);
+                }
                 article.setNumber(word);
                 word = "";
                 spacecounter++;
