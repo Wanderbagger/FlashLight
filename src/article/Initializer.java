@@ -23,14 +23,12 @@ public class Initializer {
                     recognize(lines.get(i));
                 }
             }
-
         } catch (IOException e) {
             e.printStackTrace();
         }
         for (Article article : criminalCode) {
             System.out.println(article);
         }
-
     }
 
     private void recognize(String line) { // распознавание
@@ -48,11 +46,14 @@ public class Initializer {
                 if(currentArticle!=null){
                     criminalCode.add(currentArticle);
                 }
-
                 currentArticle = null;
+                currentArticle = recognizeArticle(line);
+                previousLineType = "статья";
+            } else {
+                currentArticle = recognizeArticle(line);
+                previousLineType = "статья";
             }
-            currentArticle = recognizeArticle(line);
-            previousLineType = "статья";
+
 
         } else if(chooseType(line).equals("часть")){
             if(previousLineType.equals("параграф")){
