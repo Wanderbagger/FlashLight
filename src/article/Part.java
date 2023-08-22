@@ -28,10 +28,10 @@ public class Part {
 
     @Override
     public String toString() {
-        return "Part{" +
+        return "Part " +
                 "number='" + number + '\'' +
                 ", description='" + description + '\'' +
-                ", paragraphs=" + paragraphs +
-                '}';
+                ", paragraphs=" + paragraphs +  '\n';
+
     }
 }
