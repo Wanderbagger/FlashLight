@@ -1,12 +1,13 @@
 package article;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Part {
 
     private String number;
     private String description;
-    protected ArrayList <Paragraph> paragraphs = new ArrayList<>();
+    protected List<Paragraph> paragraphs = new ArrayList<>();
 
 
     public String getDescription() {
