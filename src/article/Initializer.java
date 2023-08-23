@@ -9,57 +9,79 @@ import java.util.List;
 
 
 public class Initializer {
-    public final ArrayList<Article> criminalCode = new ArrayList<>();;
+    private final List<Article> criminalCode = new ArrayList<>();
     private Article currentArticle;
-    private Part currentPart = new Part();
-    private Paragraph currentParagraph = new Paragraph();
-    private String nextLineType;
+    private Part currentPart;
+    private Paragraph currentParagraph;
+    private LineType previousLineType;
 
     public void initializeCriminalCode() {
         try {
             List<String> lines = Files.readAllLines(Paths.get("src/CriminalCode.txt"));
             for (int i = 1; i < lines.size(); i++) {
-                if(lines.get(i).length() > 1) {
-                        if(!chooseType(lines.get(i + 1)).equals("ошибка") && lines.size() > (i + 1)) {
-                            nextLineType = chooseType(lines.get(i + 1));
-                            System.out.println(nextLineType);
-                        }
+                if(lines.get(i).length() > 1 && lines.size() > (i + 1)) {
                     recognize(lines.get(i));
                 }
             }
-
+            criminalCode.add(currentArticle);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-    }
-
-    private Article recognize(String line) { // распознавание
-        if (chooseType(line).equals("статья")){
-            currentArticle = recognizeArticle(line);
-            System.out.println(currentArticle);
-        } else if(chooseType(line).equals("часть")){
-                currentPart = recognizePart(line);
-                System.out.println(currentPart);
-        } else if(chooseType(line).equals("параграф")){
-            currentParagraph = recognizeParagraph(line);
-            System.out.println(currentParagraph);
+        for (Article article : criminalCode) {
+            System.out.println(article);
         }
-        return currentArticle;
     }
 
-    private String chooseType (String line) { // распознавание следующей строки
+    private void recognize(String line) { // распознавание
+        if (chooseType(line).equals(LineType.ARTICLE)){
+            if(previousLineType!=null) {
+                if (previousLineType.equals(LineType.PART) && currentPart != null) {
+                    currentArticle.parts.add(currentPart);
+                    currentPart = null;
+                } else if (previousLineType.equals(LineType.PARAGRAPH) && currentPart != null && currentParagraph != null) {
+                    currentPart.paragraphs.add(currentParagraph);
+                    currentArticle.parts.add(currentPart);
+                    currentParagraph = null;
+                    currentPart = null;
+                }
+                if(currentArticle!=null){
+                    criminalCode.add(currentArticle);
+                }
+                currentArticle = null;
+            }
+            currentArticle = recognizeArticle(line);
+            previousLineType = LineType.ARTICLE;
+        } else if(chooseType(line).equals(LineType.PART)){
+            if(previousLineType.equals(LineType.PARAGRAPH)){
+                currentPart.paragraphs.add(currentParagraph);
+                currentParagraph = null;
+            }
+            if(currentPart != null){
+                currentArticle.parts.add(currentPart);
+            }
+            currentPart = recognizePart(line);
+            previousLineType = LineType.PART;
+        } else if(chooseType(line).equals(LineType.PARAGRAPH)){
+            if (currentParagraph!=null){
+                currentPart.paragraphs.add(currentParagraph);
+            }
+            currentParagraph = recognizeParagraph(line);
+            previousLineType = LineType.PARAGRAPH;
+        }
+    }
+
+    private LineType chooseType (String line) { // распознавание следующей строки
         if(line.length() < 1){
-            return "ошибка";
+            return LineType.ERROR;
         }
         if (line.charAt(0) == 'С' && line.charAt(1) == 'т'){
-            return "статья";
+            return LineType.ARTICLE;
         } else if(Character.isDigit(line.charAt(0)) && line.charAt(1) == '.'){
-            return "часть";
+            return LineType.PART;
         } else if(Character.isLetter(line.charAt(0)) && line.charAt(1) == ')'){
-            return "параграф";
+            return LineType.PARAGRAPH;
         }
-        return "ошибка";
+        return LineType.ERROR;
     }
 
     private Article recognizeArticle(String line){
@@ -88,6 +110,16 @@ public class Initializer {
         int spacecounter = 0;
         Part part = new Part();
         String word = "";
+        /*
+        if(Character.isDigit(line.charAt(0)) && line.charAt(1) == '.' && Character.isDigit(line.charAt(2))){
+            word += line.charAt(0) + line.charAt(1) + line.charAt(0);
+            part.setNumber(word);
+            part.setDescription(word.substring(5, line.length()-1));
+            System.out.println(part);
+            return part;
+        }
+
+         */
         for (int i = 0; i < line.length(); i++) {
             if(line.charAt(i) == '.'){
                 part.setNumber(word);

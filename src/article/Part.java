@@ -28,10 +28,15 @@ public class Part {
 
     @Override
     public String toString() {
-        return "Part " +
-                "number='" + number + '\'' +
-                ", description='" + description + '\'' +
-                ", paragraphs=" + paragraphs +  '\n';
+        printParagraph();
+        return "";
 
+    }
+
+    public void printParagraph(){
+        System.out.println("Part " + "number='" + number + '\'' + ", description='" + description + '\'' );
+        for (Paragraph paragraph : paragraphs) {
+            System.out.println(paragraph);
+        }
     }
 }

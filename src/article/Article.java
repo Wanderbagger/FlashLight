@@ -26,10 +26,14 @@ public class Article {
 
     @Override
     public String toString() {
-        return "Article{" + '\'' +
-                "number='" + number + "'" + '\n' +
-                "description='" + description + "'" + '\n' +
-                "parts=" + parts +
-                '}';
+        printArticle();
+        return "";
+    }
+
+    public void printArticle(){
+        System.out.println("Article{" + '\'' + "number='" + number + "'" + '\n' + "description='" + description + "'" + '\n');
+        for (Part part : parts) {
+            System.out.println(part);
+        }
     }
 }
