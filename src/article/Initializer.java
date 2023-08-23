@@ -9,72 +9,43 @@ import java.util.List;
 
 
 public class Initializer {
-    public final ArrayList<Article> criminalCode = new ArrayList<>();
-    private Article currentArticle = new Article();
+    public final ArrayList<Article> criminalCode = new ArrayList<>();;
+    private Article currentArticle;
     private Part currentPart = new Part();
     private Paragraph currentParagraph = new Paragraph();
-    private String previousLineType;
+    private String nextLineType;
 
     public void initializeCriminalCode() {
         try {
             List<String> lines = Files.readAllLines(Paths.get("src/CriminalCode.txt"));
             for (int i = 1; i < lines.size(); i++) {
-                if(lines.get(i).length() > 1 && lines.size() > (i + 1)) {
+                if(lines.get(i).length() > 1) {
+                        if(!chooseType(lines.get(i + 1)).equals("ошибка") && lines.size() > (i + 1)) {
+                            nextLineType = chooseType(lines.get(i + 1));
+                            System.out.println(nextLineType);
+                        }
                     recognize(lines.get(i));
                 }
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (Article article : criminalCode) {
-            System.out.println(article);
-        }
+
     }
 
-    private void recognize(String line) { // распознавание
+    private Article recognize(String line) { // распознавание
         if (chooseType(line).equals("статья")){
-            if(previousLineType!=null) {
-                if (previousLineType.equals("часть") && currentPart != null) {
-                    currentArticle.parts.add(currentPart);
-                    currentPart = null;
-                } else if (previousLineType.equals("параграф") && currentPart != null && currentParagraph != null) {
-                    currentPart.paragraphs.add(currentParagraph);
-                    currentArticle.parts.add(currentPart);
-                    currentParagraph = null;
-                    currentPart = null;
-                }
-                if(currentArticle!=null){
-                    criminalCode.add(currentArticle);
-                }
-                currentArticle = null;
-                currentArticle = recognizeArticle(line);
-                previousLineType = "статья";
-            } else {
-                currentArticle = recognizeArticle(line);
-                previousLineType = "статья";
-            }
-
-
+            currentArticle = recognizeArticle(line);
+            System.out.println(currentArticle);
         } else if(chooseType(line).equals("часть")){
-            if(previousLineType.equals("параграф")){
-                currentPart.paragraphs.add(currentParagraph);
-                currentParagraph = null;
-            }
-
-            if(currentPart != null){
-                currentArticle.parts.add(currentPart);
-            }
-            currentPart = recognizePart(line);
-            previousLineType = "часть";
+                currentPart = recognizePart(line);
+                System.out.println(currentPart);
         } else if(chooseType(line).equals("параграф")){
-
-            if (currentParagraph!=null){
-                currentPart.paragraphs.add(currentParagraph);
-
-            }
             currentParagraph = recognizeParagraph(line);
-            previousLineType = "параграф";
+            System.out.println(currentParagraph);
         }
+        return currentArticle;
     }
 
     private String chooseType (String line) { // распознавание следующей строки
