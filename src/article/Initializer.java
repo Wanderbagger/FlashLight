@@ -28,7 +28,7 @@ public class Initializer {
             e.printStackTrace();
         }
         for (Article article : criminalCode) {
-            System.out.println(article);
+             System.out.println(article);
         }
     }
 
@@ -109,17 +109,19 @@ public class Initializer {
     private Part recognizePart(String line){
         int spacecounter = 0;
         Part part = new Part();
-        String word = "";
-        /*
+         String word = "";
+
         if(Character.isDigit(line.charAt(0)) && line.charAt(1) == '.' && Character.isDigit(line.charAt(2))){
-            word += line.charAt(0) + line.charAt(1) + line.charAt(0);
+
+            word = line.substring(0,3);
+
             part.setNumber(word);
-            part.setDescription(word.substring(5, line.length()-1));
+            part.setDescription(line.substring(5, line.length()-1));
             System.out.println(part);
             return part;
         }
 
-         */
+
         for (int i = 0; i < line.length(); i++) {
             if(line.charAt(i) == '.'){
                 part.setNumber(word);
