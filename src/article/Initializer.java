@@ -9,7 +9,7 @@ import java.util.List;
 
 
 public class Initializer {
-    private final List<Article> criminalCode = new ArrayList<>();
+    private final List<Article> articleArrayList = new ArrayList<>();
     private Article currentArticle;
     private Part currentPart;
     private Paragraph currentParagraph;
@@ -23,11 +23,11 @@ public class Initializer {
                     recognize(lines.get(i));
                 }
             }
-            criminalCode.add(currentArticle);
+            articleArrayList.add(currentArticle);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        for (Article article : criminalCode) {
+        for (Article article : articleArrayList) {
              System.out.println(article);
         }
     }
@@ -45,7 +45,7 @@ public class Initializer {
                     currentPart = null;
                 }
                 if(currentArticle!=null){
-                    criminalCode.add(currentArticle);
+                    articleArrayList.add(currentArticle);
                 }
                 currentArticle = null;
             }
@@ -86,71 +86,37 @@ public class Initializer {
 
     private Article recognizeArticle(String line){
         Article article = new Article();
-        int spacecounter = 0;
-        String word = "";
-        for (int i = 7; i < line.length(); i++) {
-            if(line.charAt(i) == ' ' && spacecounter == 0){
-                if(word.charAt(word.length()-1) == '.'){
-                    word = word.substring(0, word.length() - 1);
-                }
-                article.setNumber(word);
-                word = "";
-                spacecounter++;
-            } else if ((line.charAt(i) == ' ' && spacecounter > 0) || (i + 1) == line.length()){
-                word += line.charAt(i);
-                article.setDescription(word);
-            } else {
-                word += line.charAt(i);
-            }
+        if(line.charAt(11) == ' ' ){
+            article.setNumber(line.substring(7, 10));
+            article.setDescription(line.substring(11));
+        } else if (Character.isDigit(line.charAt(11))){
+            article.setNumber(line.substring(7, 12));
+            article.setDescription(line.substring(13));
         }
         return article;
     }
 
     private Part recognizePart(String line){
-        int spacecounter = 0;
         Part part = new Part();
-         String word = "";
-
-        if(Character.isDigit(line.charAt(0)) && line.charAt(1) == '.' && Character.isDigit(line.charAt(2))){
-
-            word = line.substring(0,3);
-
-            part.setNumber(word);
-            part.setDescription(line.substring(5, line.length()-1));
-            System.out.println(part);
+        if(Character.isDigit(line.charAt(0)) && line.charAt(1) == '.' && line.charAt(2) == ' '){
+            part.setNumber(line.substring(0,1));
+            part.setDescription(line.substring(3));
+        } else if (Character.isDigit(line.charAt(0)) && line.charAt(1) == '.' && Character.isDigit(line.charAt(2)) && line.charAt(3) == '.'){
+            part.setNumber(line.substring(0,3));
+            part.setDescription(line.substring(5));
+        }
             return part;
-        }
-
-
-        for (int i = 0; i < line.length(); i++) {
-            if(line.charAt(i) == '.'){
-                part.setNumber(word);
-            } else if (line.charAt(i) == ' ' && spacecounter == 0) {
-                word = "";
-                spacecounter++;
-            } else if ((line.charAt(i) == ' ' && spacecounter > 0) || (i + 1) == line.length()){
-                word += line.charAt(i);
-                part.setDescription(word);
-            } else {
-                word += line.charAt(i);
-            }
-        }
-        return part;
     }
 
-    private Paragraph recognizeParagraph(String line){
+    private Paragraph recognizeParagraph(String line){ // распознавание параграфа
         Paragraph paragraph = new Paragraph();
-        String word = "";
-        for (int i = 0; i < line.length(); i++) {
-            if(line.charAt(i) == ')'){
-                paragraph.setNumber(word);
-                word = "";
-            } else if ((i + 1) == line.length()){
-                word += line.charAt(i);
-                paragraph.setDescription(word);
-            } else {
-                word += line.charAt(i);
-            }
+        if(Character.isLetter(line.charAt(0)) && line.charAt(1) == ')'){
+            paragraph.setNumber(line.substring(0,1));
+            paragraph.setDescription(line.substring(3));
+        } else if (  line.charAt(3) == ')'){
+            System.out.println("!!!!!!!!!");
+            paragraph.setNumber(line.substring(0,3));
+            paragraph.setDescription(line.substring(5));
         }
         return paragraph;
     }
