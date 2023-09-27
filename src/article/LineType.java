@@ -4,5 +4,6 @@ public enum LineType {
     ARTICLE,
     PART,
     PARAGRAPH,
-    ERROR
+    ERROR,
+    NOTE
 }

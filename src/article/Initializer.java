@@ -50,8 +50,16 @@ public class Initializer {
                 currentArticle = null;
             }
             currentArticle = recognizeArticle(line);
-            previousLineType = LineType.ARTICLE;
+            previousLineType = chooseType(line);
         } else if(chooseType(line).equals(LineType.PART)){
+
+            if(previousLineType.equals(LineType.NOTE)){
+                if(currentPart != null) {
+                    currentArticle.parts.add(currentPart);
+                    currentPart = null;
+                }
+                    return;
+                }
             if(previousLineType.equals(LineType.PARAGRAPH)){
                 currentPart.paragraphs.add(currentParagraph);
                 currentParagraph = null;
@@ -60,13 +68,15 @@ public class Initializer {
                 currentArticle.parts.add(currentPart);
             }
             currentPart = recognizePart(line);
-            previousLineType = LineType.PART;
+            previousLineType = chooseType(line);
         } else if(chooseType(line).equals(LineType.PARAGRAPH)){
             if (currentParagraph!=null){
                 currentPart.paragraphs.add(currentParagraph);
             }
             currentParagraph = recognizeParagraph(line);
-            previousLineType = LineType.PARAGRAPH;
+            previousLineType = chooseType(line);
+        } else if(chooseType(line).equals(LineType.NOTE)){
+            previousLineType = chooseType(line);
         }
     }
 
@@ -78,8 +88,10 @@ public class Initializer {
             return LineType.ARTICLE;
         } else if(Character.isDigit(line.charAt(0)) && line.charAt(1) == '.'){
             return LineType.PART;
-        } else if(Character.isLetter(line.charAt(0)) && line.charAt(1) == ')'){
+        } else if(Character.isLetter(line.charAt(0)) && line.charAt(1) == ')' || Character.isLetter(line.charAt(0)) && line.charAt(1) == '.'){
             return LineType.PARAGRAPH;
+        } else if (line.charAt(0) == 'П' && line.charAt(1) == 'р') {
+            return LineType.NOTE;
         }
         return LineType.ERROR;
     }
@@ -113,8 +125,7 @@ public class Initializer {
         if(Character.isLetter(line.charAt(0)) && line.charAt(1) == ')'){
             paragraph.setNumber(line.substring(0,1));
             paragraph.setDescription(line.substring(3));
-        } else if (  line.charAt(3) == ')'){
-            System.out.println("!!!!!!!!!");
+        } else if (Character.isLetter(line.charAt(0)) && line.charAt(1) == '.'){
             paragraph.setNumber(line.substring(0,3));
             paragraph.setDescription(line.substring(5));
         }
