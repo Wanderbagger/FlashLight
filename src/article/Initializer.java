@@ -13,17 +13,18 @@ public class Initializer {
     private Article currentArticle;
     private Part currentPart;
     private Paragraph currentParagraph;
-    private LineType previousLineType;
+    private LineType previousLineType = LineType.ARTICLE;
+    private LineType currentLineType;
 
     public void initializeCriminalCode() {
         try {
-            List<String> lines = Files.readAllLines(Paths.get("src/CriminalCode.txt"));
+            List<String> lines = Files.readAllLines(Paths.get("src/CriminalCode.txt")); // считываем все строки из файла по очереди
             for (int i = 1; i < lines.size(); i++) {
                 if(lines.get(i).length() > 1 && lines.size() > (i + 1)) {
                     recognize(lines.get(i));
                 }
             }
-            articleArrayList.add(currentArticle);
+            articleArrayList.add(currentArticle); // добавляем статьи в кодекс
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -33,6 +34,7 @@ public class Initializer {
     }
 
     private void recognize(String line) { // распознавание
+
         if (chooseType(line).equals(LineType.ARTICLE)){
             if(previousLineType!=null) {
                 if (previousLineType.equals(LineType.PART) && currentPart != null) {
@@ -76,6 +78,14 @@ public class Initializer {
             currentParagraph = recognizeParagraph(line);
             previousLineType = chooseType(line);
         } else if(chooseType(line).equals(LineType.NOTE)){
+            if(currentParagraph!=null){
+                currentPart.paragraphs.add(currentParagraph);
+                currentParagraph = null;
+            }
+            if(currentPart != null) {
+                currentArticle.parts.add(currentPart);
+                currentPart = null;
+            }
             previousLineType = chooseType(line);
         }
     }
