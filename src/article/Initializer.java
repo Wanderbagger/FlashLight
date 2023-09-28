@@ -21,7 +21,9 @@ public class Initializer {
             List<String> lines = Files.readAllLines(Paths.get("src/CriminalCode.txt")); // считываем все строки из файла по очереди
             for (int i = 1; i < lines.size(); i++) {
                 if(lines.get(i).length() > 1 && lines.size() > (i + 1)) {
-                    recognize(lines.get(i));
+                    if(!chooseType(lines.get(i)).equals(LineType.ERROR)){
+                        recognize(lines.get(i));
+                    }
                 }
             }
             articleArrayList.add(currentArticle); // добавляем статьи в кодекс
@@ -34,8 +36,8 @@ public class Initializer {
     }
 
     private void recognize(String line) { // распознавание
-
-        if (chooseType(line).equals(LineType.ARTICLE)){
+        currentLineType = chooseType(line);
+        if (currentLineType.equals(LineType.ARTICLE)){
             if(previousLineType!=null) {
                 if (previousLineType.equals(LineType.PART) && currentPart != null) {
                     currentArticle.parts.add(currentPart);
@@ -52,9 +54,7 @@ public class Initializer {
                 currentArticle = null;
             }
             currentArticle = recognizeArticle(line);
-            previousLineType = chooseType(line);
-        } else if(chooseType(line).equals(LineType.PART)){
-
+        } else if(currentLineType.equals(LineType.PART)){
             if(previousLineType.equals(LineType.NOTE)){
                 if(currentPart != null) {
                     currentArticle.parts.add(currentPart);
@@ -70,14 +70,12 @@ public class Initializer {
                 currentArticle.parts.add(currentPart);
             }
             currentPart = recognizePart(line);
-            previousLineType = chooseType(line);
-        } else if(chooseType(line).equals(LineType.PARAGRAPH)){
+        } else if(currentLineType.equals(LineType.PARAGRAPH)){
             if (currentParagraph!=null){
                 currentPart.paragraphs.add(currentParagraph);
             }
             currentParagraph = recognizeParagraph(line);
-            previousLineType = chooseType(line);
-        } else if(chooseType(line).equals(LineType.NOTE)){
+        } else if(currentLineType.equals(LineType.NOTE)){
             if(currentParagraph!=null){
                 currentPart.paragraphs.add(currentParagraph);
                 currentParagraph = null;
@@ -86,8 +84,8 @@ public class Initializer {
                 currentArticle.parts.add(currentPart);
                 currentPart = null;
             }
-            previousLineType = chooseType(line);
         }
+        previousLineType = currentLineType;
     }
 
     private LineType chooseType (String line) { // распознавание следующей строки
