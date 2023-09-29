@@ -14,7 +14,6 @@ public class Initializer {
     private Part currentPart;
     private Paragraph currentParagraph;
     private LineType previousLineType = LineType.ARTICLE;
-    private LineType currentLineType;
 
     public void initializeCriminalCode() {
         try {
@@ -36,56 +35,48 @@ public class Initializer {
     }
 
     private void recognize(String line) { // распознавание
-        currentLineType = chooseType(line);
+        LineType currentLineType = chooseType(line);
         if (currentLineType.equals(LineType.ARTICLE)){
             if(previousLineType!=null) {
-                if (previousLineType.equals(LineType.PART) && currentPart != null) {
-                    currentArticle.parts.add(currentPart);
-                    currentPart = null;
-                } else if (previousLineType.equals(LineType.PARAGRAPH) && currentPart != null && currentParagraph != null) {
-                    currentPart.paragraphs.add(currentParagraph);
-                    currentArticle.parts.add(currentPart);
-                    currentParagraph = null;
-                    currentPart = null;
-                }
-                if(currentArticle!=null){
-                    articleArrayList.add(currentArticle);
-                }
-                currentArticle = null;
+                addArticle();
             }
-            currentArticle = recognizeArticle(line);
+            recognizeArticle(line);
         } else if(currentLineType.equals(LineType.PART)){
+            addPart();
             if(previousLineType.equals(LineType.NOTE)){
-                if(currentPart != null) {
-                    currentArticle.parts.add(currentPart);
-                    currentPart = null;
-                }
                     return;
                 }
-            if(previousLineType.equals(LineType.PARAGRAPH)){
-                currentPart.paragraphs.add(currentParagraph);
-                currentParagraph = null;
-            }
-            if(currentPart != null){
-                currentArticle.parts.add(currentPart);
-            }
-            currentPart = recognizePart(line);
+            recognizePart(line);
         } else if(currentLineType.equals(LineType.PARAGRAPH)){
-            if (currentParagraph!=null){
-                currentPart.paragraphs.add(currentParagraph);
-            }
-            currentParagraph = recognizeParagraph(line);
+            addParagraph();
+            recognizeParagraph(line);
         } else if(currentLineType.equals(LineType.NOTE)){
-            if(currentParagraph!=null){
-                currentPart.paragraphs.add(currentParagraph);
-                currentParagraph = null;
-            }
-            if(currentPart != null) {
-                currentArticle.parts.add(currentPart);
-                currentPart = null;
-            }
+            addPart();
         }
         previousLineType = currentLineType;
+    }
+
+    private void addParagraph(){
+        if(currentParagraph!=null){
+            currentPart.paragraphs.add(currentParagraph);
+        }
+        currentParagraph = null;
+    }
+
+    private void addPart(){
+        addParagraph();
+        if(currentPart != null) {
+            currentArticle.parts.add(currentPart);
+        }
+        currentPart = null;
+    }
+
+    private void addArticle(){
+        addPart();
+        if(currentArticle!=null){
+            articleArrayList.add(currentArticle);
+        }
+        currentArticle = null;
     }
 
     private LineType chooseType (String line) { // распознавание следующей строки
@@ -104,7 +95,7 @@ public class Initializer {
         return LineType.ERROR;
     }
 
-    private Article recognizeArticle(String line){
+    private void recognizeArticle(String line){
         Article article = new Article();
         if(line.charAt(11) == ' ' ){
             article.setNumber(line.substring(7, 10));
@@ -113,10 +104,10 @@ public class Initializer {
             article.setNumber(line.substring(7, 12));
             article.setDescription(line.substring(13));
         }
-        return article;
+        currentArticle = article;
     }
 
-    private Part recognizePart(String line){
+    private void recognizePart(String line){
         Part part = new Part();
         if(Character.isDigit(line.charAt(0)) && line.charAt(1) == '.' && line.charAt(2) == ' '){
             part.setNumber(line.substring(0,1));
@@ -125,10 +116,10 @@ public class Initializer {
             part.setNumber(line.substring(0,3));
             part.setDescription(line.substring(5));
         }
-            return part;
+            currentPart = part;
     }
 
-    private Paragraph recognizeParagraph(String line){ // распознавание параграфа
+    private void recognizeParagraph(String line){ // распознавание параграфа
         Paragraph paragraph = new Paragraph();
         if(Character.isLetter(line.charAt(0)) && line.charAt(1) == ')'){
             paragraph.setNumber(line.substring(0,1));
@@ -137,7 +128,7 @@ public class Initializer {
             paragraph.setNumber(line.substring(0,3));
             paragraph.setDescription(line.substring(5));
         }
-        return paragraph;
+        currentParagraph = paragraph;
     }
 
 }
