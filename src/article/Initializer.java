@@ -25,7 +25,7 @@ public class Initializer {
                     }
                 }
             }
-            articleArrayList.add(currentArticle); // добавляем статьи в кодекс
+            articleArrayList.add(currentArticle); // добавляем статью в кодекс в конце процедуры
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -38,20 +38,20 @@ public class Initializer {
         LineType currentLineType = chooseType(line);
         if (currentLineType.equals(LineType.ARTICLE)){
             if(previousLineType!=null) {
-                addArticle();
+                addArticle(); // статья добавляется только в начале распознавания следующей статьи в кодекс или по завершении всей процедуры
             }
             recognizeArticle(line);
-        } else if(currentLineType.equals(LineType.PART)){
-            addPart();
-            if(previousLineType.equals(LineType.NOTE)){
+        } else if(currentLineType.equals(LineType.PART)){ // добавление части
+            addPart(); // добавление предыдущей части перед распознаванием следующей
+            if(previousLineType.equals(LineType.NOTE)){ // исключение ошибочного распознавания примечания как части
                     return;
                 }
             recognizePart(line);
         } else if(currentLineType.equals(LineType.PARAGRAPH)){
-            addParagraph();
+            addParagraph(); // добавление параграфа перед распознаванием предыдущего
             recognizeParagraph(line);
         } else if(currentLineType.equals(LineType.NOTE)){
-            addPart();
+            addPart(); // при обнаружении примечания - добавить часть
         }
         previousLineType = currentLineType;
     }
@@ -60,7 +60,7 @@ public class Initializer {
         if(currentParagraph!=null){
             currentPart.paragraphs.add(currentParagraph);
         }
-        currentParagraph = null;
+        currentParagraph = null; // обнуление значения после добавления распознанного параграфа
     }
 
     private void addPart(){
@@ -68,7 +68,7 @@ public class Initializer {
         if(currentPart != null) {
             currentArticle.parts.add(currentPart);
         }
-        currentPart = null;
+        currentPart = null; // обнуление значения после добавления распознанной части
     }
 
     private void addArticle(){
@@ -76,7 +76,7 @@ public class Initializer {
         if(currentArticle!=null){
             articleArrayList.add(currentArticle);
         }
-        currentArticle = null;
+        currentArticle = null; // обнуление значения после добавления
     }
 
     private LineType chooseType (String line) { // распознавание следующей строки
