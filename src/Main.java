@@ -1,8 +1,11 @@
-import article.Initializer;
+import article.LawRulesManager;
+import manager.MenuManager;
 
 public class Main {
     public static void main(String[] args) {
-        Initializer initializer = new Initializer();
-        initializer.initializeCriminalCode();
+        LawRulesManager lawRulesManager = new LawRulesManager();
+        lawRulesManager.initializeCriminalCode();
+        MenuManager menuManager = new MenuManager();
+        menuManager.start();
     }
 }

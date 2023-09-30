@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Initializer {
+public class LawRulesManager {
     private final List<Article> articleArrayList = new ArrayList<>();
     private Article currentArticle;
     private Part currentPart;

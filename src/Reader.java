@@ -24,7 +24,7 @@ public class Reader {
             reader = new BufferedReader(new FileReader(f));
             String line = reader.readLine();
             while (line != null) {
-                Initializer initializer = new Initializer();
+                LawRulesManager initializer = new LawRulesManager();
                 quest = initializer.recognize(line, name); // построчное распознавание квестов
                 quests.put(quest.getId(), quest); // распознали - вставили в массив
 
