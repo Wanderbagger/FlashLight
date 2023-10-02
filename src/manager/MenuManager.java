@@ -3,8 +3,8 @@ package manager;
 import java.util.Scanner;
 
 public class MenuManager {
-    public void start(){
-        while (true){
+    public void start() {
+        while (true) {
             System.out.println("Что вы хотите сделать?");
             System.out.println("1 - возбуждение нового уголовного дела");
             System.out.println("2 - произвести новые действия по старому делу");
@@ -13,13 +13,21 @@ public class MenuManager {
             Scanner sc = new Scanner(System.in);
             if (sc.hasNextInt()) {
                 int number = sc.nextInt();
-                System.out.println(number);
-                if(number == 0){
+                if (number == 1) {
+                    System.out.println("ВОЗБУЖДЕНИЕ УГОЛОВНОГО ДЕЛА");
+                } else if (number == 2) {
+                    System.out.println("НОВЫЕ ДЕЙСТВИЯ");
+                } else if (number == 3) {
+                    System.out.println("ИНФОРМАЦИЯ");
+                } else if (number == 0) {
+                    System.out.println("ВЫХОД");
                     break;
+                } else {
+                    System.out.println("Неверная команда, повторите ввод");
+
                 }
             } else {
                 System.out.println("Неверная команда, повторите ввод");
-
             }
         }
     }

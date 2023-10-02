@@ -1,3 +1,5 @@
+package manager.CriminalCaseManager;
+
 import manager.LawRuleManager.Article;
 import investigator.Investigator;
 
@@ -14,4 +16,13 @@ public class CriminalCase {
     private LocalDateTime proceduralTerm; // процессуальный срок по делу
     private ArrayList <ProceduralDecision> proceduralDecisions; // принятые процессуальные решения по делу;
     private String accusationPlot; // фабула уголовного дела
+    private String number;
+
+    public Investigator getCurrentInvestigator() {
+        return currentInvestigator;
+    }
+
+    public String getNumber() {
+        return number;
+    }
 }
