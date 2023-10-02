@@ -1,4 +1,4 @@
-import article.Article;
+import manager.LawRuleManager.Article;
 import investigator.Investigator;
 
 import java.time.LocalDateTime;

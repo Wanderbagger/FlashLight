@@ -1,4 +1,4 @@
-package article;
+package manager.LawRuleManager;
 
 import java.util.ArrayList;
 

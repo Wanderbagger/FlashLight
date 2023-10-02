@@ -1,4 +1,4 @@
-package article;
+package manager.LawRuleManager;
 
 public abstract class LawRule {
     private String number;

@@ -1,4 +1,4 @@
-package article;
+package manager.LawRuleManager;
 
 public class Paragraph extends LawRule{
 

@@ -1,4 +1,4 @@
-import article.LawRulesManager;
+import manager.LawRuleManager.LawRulesManager;
 import manager.MenuManager;
 
 public class Main {
