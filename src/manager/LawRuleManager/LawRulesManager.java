@@ -131,4 +131,8 @@ public class LawRulesManager {
         currentParagraph = paragraph;
     }
 
+
+    private void cutDescription(String description){
+
+    }
 }
