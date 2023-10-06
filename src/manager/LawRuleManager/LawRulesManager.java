@@ -83,13 +83,13 @@ public class LawRulesManager {
         if (line.length() < 1) {
             return LineType.ERROR;
         }
-        if (line.charAt(0) == 'С' && line.charAt(1) == 'т') {
+        if (line.startsWith("Статья")) {
             return LineType.ARTICLE;
         } else if (Character.isDigit(line.charAt(0)) && line.charAt(1) == '.') {
             return LineType.PART;
         } else if (Character.isLetter(line.charAt(0)) && line.charAt(1) == ')' || Character.isLetter(line.charAt(0)) && line.charAt(1) == '.') {
             return LineType.PARAGRAPH;
-        } else if (line.charAt(0) == 'П' && line.charAt(1) == 'р') {
+        } else if (line.startsWith("Примечани")) {
             return LineType.NOTE;
         }
         return LineType.ERROR;

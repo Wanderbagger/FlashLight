@@ -1,11 +1,14 @@
 package manager.CriminalCaseManager;
 
+import investigator.Investigator;
+import manager.CriminalCaseManager.ProceduralDesicion.ProceduralDecision;
+
 import java.util.HashMap;
 
 public interface CriminalCaseManager {
 
 
-    void addNewCase(CriminalCase criminalCase);
+    void addNewCase(Investigator investigator);
 
     void deleteCase(String caseId);
 

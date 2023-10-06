@@ -1,5 +1,9 @@
 package manager.CriminalCaseManager;
 
+import investigator.Investigator;
+import manager.CriminalCaseManager.ProceduralDesicion.ProceduralDecision;
+
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class InMemoryCriminalCaseManager implements CriminalCaseManager{
@@ -7,7 +11,17 @@ public class InMemoryCriminalCaseManager implements CriminalCaseManager{
     private Map<String, CriminalCase> criminalCaseMap;
 
     @Override
-    public void addNewCase(CriminalCase criminalCase) {
+    public void addNewCase(Investigator investigator) {
+        CriminalCase criminalCase = new CriminalCase();
+        criminalCase.setStartDate(LocalDateTime.now());
+        criminalCase.setCurrentInvestigator(investigator);
+        System.out.println("Введите номер уголовного дела");
+        System.out.println("Введите статью");
+        System.out.println("Введите место возбуждения уголовного дела");
+        System.out.println("Введите номер КУСП");
+        System.out.println("Введите фабулу уголовного дела");
+        System.out.println("Введите данные фигуранта");
+        System.out.println("Введите данные потерпевшего");
         if(!criminalCaseMap.containsKey(criminalCase.getNumber()) && criminalCase != null){
             criminalCaseMap.put(criminalCase.getNumber(), criminalCase);
         }
