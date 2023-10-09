@@ -2,7 +2,7 @@ package manager.CriminalCaseManager;
 
 import manager.CriminalCaseManager.ProceduralDesicion.ProceduralDecision;
 import manager.LawRuleManager.Article;
-import investigator.Investigator;
+import investigatorManager.Investigator;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package investigator;
+package investigatorManager;
 
 public enum Department {
 

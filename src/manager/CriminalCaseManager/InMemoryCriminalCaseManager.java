@@ -1,6 +1,6 @@
 package manager.CriminalCaseManager;
 
-import investigator.Investigator;
+import investigatorManager.Investigator;
 import manager.CriminalCaseManager.ProceduralDesicion.ProceduralDecision;
 
 import java.time.LocalDateTime;

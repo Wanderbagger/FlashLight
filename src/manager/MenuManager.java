@@ -1,5 +1,7 @@
 package manager;
 
+import investigatorManager.InvestigatorManager;
+
 import java.util.Scanner;
 
 public class MenuManager {
@@ -9,6 +11,7 @@ public class MenuManager {
             System.out.println("1 - возбуждение нового уголовного дела");
             System.out.println("2 - произвести новые действия по старому делу");
             System.out.println("3 - посмотреть информацию базы уголовных дел");
+            System.out.println("4 - выбрать следователя");
             System.out.println("0 - выход");
             Scanner sc = new Scanner(System.in);
             if (sc.hasNextInt()) {
@@ -19,6 +22,10 @@ public class MenuManager {
                     System.out.println("НОВЫЕ ДЕЙСТВИЯ");
                 } else if (number == 3) {
                     System.out.println("ИНФОРМАЦИЯ");
+                } else if (number == 4) {
+                    System.out.println("Выбрать следователя");
+                    InvestigatorManager investigatorManager = new InvestigatorManager();
+
                 } else if (number == 0) {
                     System.out.println("ВЫХОД");
                     break;
