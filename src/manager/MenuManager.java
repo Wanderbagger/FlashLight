@@ -25,6 +25,7 @@ public class MenuManager {
                 } else if (number == 4) {
                     System.out.println("Выбрать следователя");
                     InvestigatorManager investigatorManager = new InvestigatorManager();
+                    investigatorManager.chooseInvestigator();
 
                 } else if (number == 0) {
                     System.out.println("ВЫХОД");

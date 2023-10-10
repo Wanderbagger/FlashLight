@@ -1,20 +1,19 @@
 package investigatorManager;
 
 public enum InvestigatorRank {
-    JUNIOR_LIEUTENANT ("младший лейтенант", 1),
-    LIEUTENANT ("лейтенант", 2),
-    SENIOR_LIEUTENANT ("старший лейтенант", 3),
-    CAPTAIN ("капитан", 4),
-    MAJOR ("майор", 5),
-    LIEUTENANT_COLONEL("подполковник", 6),
-    COLONEL("полковник", 7);
+    JUNIOR_LIEUTENANT ("младший лейтенант"),
+    LIEUTENANT ("лейтенант"),
+    SENIOR_LIEUTENANT ("старший лейтенант"),
+    CAPTAIN ("капитан"),
+    MAJOR ("майор"),
+    LIEUTENANT_COLONEL("подполковник"),
+    COLONEL("полковник");
 
     private final String title;
-    private final int number;
 
-    InvestigatorRank(String title, int number) {
+
+    InvestigatorRank(String title) {
         this.title = title;
-        this.number = number;
     }
 
     public String getTitle() {
@@ -25,8 +24,6 @@ public enum InvestigatorRank {
     public String toString() {
         return "InvestigatorRank{" +
                 "title='" + title + '\'' +
-                "number='" + number + '\'' +
                 '}';
     }
 }
-
