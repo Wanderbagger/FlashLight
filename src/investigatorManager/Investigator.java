@@ -28,4 +28,13 @@ public class Investigator {
     public void setDepartment(Department department) {
         this.department = department;
     }
+
+    @Override
+    public String toString() {
+        return "Investigator{" +
+                "name='" + name + '\'' +
+                ", rank=" + rank +
+                ", department=" + department +
+                '}';
+    }
 }

@@ -1,5 +1,8 @@
 package investigatorManager;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public enum InvestigatorRank {
     JUNIOR_LIEUTENANT ("младший лейтенант"),
     LIEUTENANT ("лейтенант"),
@@ -19,6 +22,8 @@ public enum InvestigatorRank {
     public String getTitle() {
         return title + " юстиции";
     }
+
+
 
     @Override
     public String toString() {

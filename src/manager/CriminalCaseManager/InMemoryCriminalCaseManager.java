@@ -29,7 +29,7 @@ public class InMemoryCriminalCaseManager implements CriminalCaseManager{
 
     @Override
     public void deleteCase(String caseId) {
-
+        criminalCaseMap.remove(caseId);
     }
 
     @Override
