@@ -61,10 +61,10 @@ public enum Department {
     MOZHAYSKIY_PI ("Можайский", Prosecutor.KUNCEVSKAYA_PROSECUTORS_OFFICE, Court.KUNCEVSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.WESTERN),
     MOLZHANINOVSKIY_PI ("Молжаниновский", Prosecutor.GOLOVINSKAYA_PROSECUTORS_OFFICE, Court.GOLOVINSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.NORTHERN),
     MOSKVORECHYE_SABUROVO_PI ("Москворечье Сабурово", Prosecutor.NAGATINSKAYA_PROSECUTORS_OFFICE, Court.NAGATINSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.SOUTHERN),
-    Нагатино Садовники	Симоновс
-    Нагатинский затон	Симоновс
-    Нагорный	Чертановс
-    Некрасовка	Кузьминс
+    NAGATINO_SADOVNIKI_PI("Нагатино Садовники", Prosecutor.SIMONOVSKAYA_PROSECUTORS_OFFICE, Court.SIMONOVSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.SOUTHERN),
+    NAGATINSKIY_ZATON_PI ("Нагатинский затон", Prosecutor.SIMONOVSKAYA_PROSECUTORS_OFFICE, Court.SIMONOVSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.SOUTHERN),
+    NAGORNIY_PI ("Нагорный", Prosecutor.CHEREMUSHKINSKAYA_PROSECUTORS_OFFICE, Court.CHERTANOVSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.SOUTHERN),
+    NEKRASOVKA_PI ("Некрасовка", Prosecutor.KUZMINSKAYA_PROSECUTORS_OFFICE, Court.KUZMINSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.SOUTH_EASTERN),
     Нижегородский	Лефортовс
     Новогиреево	Перовс
     Новокосино	Перовс
