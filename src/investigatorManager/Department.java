@@ -65,24 +65,24 @@ public enum Department {
     NAGATINSKIY_ZATON_PI ("Нагатинский затон", Prosecutor.SIMONOVSKAYA_PROSECUTORS_OFFICE, Court.SIMONOVSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.SOUTHERN),
     NAGORNIY_PI ("Нагорный", Prosecutor.CHEREMUSHKINSKAYA_PROSECUTORS_OFFICE, Court.CHERTANOVSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.SOUTHERN),
     NEKRASOVKA_PI ("Некрасовка", Prosecutor.KUZMINSKAYA_PROSECUTORS_OFFICE, Court.KUZMINSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.SOUTH_EASTERN),
-    Нижегородский	Лефортовс
-    Новогиреево	Перовс
-    Новокосино	Перовс
-    Ново-Переделкино	Солнцевс
-    Обручевский	Гагаринс
-    Орехово-Борисово Севое	Нагатинс
-    Орехово-Борисово Южное	Нагатинс
-    Останкинский	Останкинс
-    Отрадное	Бутырс
-    Очаково-Матвеевское	Никулинс
-    Перово	Перовс
-    Печатники	Люблинс
-    Покровское - Стрешнево	Тушинс
-    Преображенское	Преображенс
-    Пресненский	Пресненс
-    Проспект Вернадского	Никулинс
-    Раменки	Никулинс
-    Ростокино	Останкинс
+    NIZHEGORODSKIY_PI ("Нижегородский", Prosecutor.LEFORTOVSKAYA_PROSECUTORS_OFFICE, Court.LEFORTOVSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.SOUTH_EASTERN),
+    NOVOGIREEVO_PI ("Новогиреево", Prosecutor.PEROVSKAYA_PROSECUTORS_OFFICE, Court.PEROVSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.EASTERN),
+    NOVOKOSINO_PI ("Новокосино", Prosecutor.PEROVSKAYA_PROSECUTORS_OFFICE, Court.PEROVSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.EASTERN),
+    NOVO_PERDELKINO_PI ("Ново-Переделкино", Prosecutor.SOLNCEVSKAYA_PROSECUTORS_OFFICE, Court.SOLNCEVSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.WESTERN),
+    OBRUCHEVSKIY_PI ("Обручевский", Prosecutor.GAGARINSKAYA_PROSECUTORS_OFFICE, Court.GAGARINSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.SOUTH_WESTERN),
+    OREHOVO_BORISOVO_NORTH_PI ("Орехово-Борисово Северное", Prosecutor.NAGATINSKAYA_PROSECUTORS_OFFICE, Court.NAGATINSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.SOUTHERN),
+    OREHOVO_BORISOVO_SOUTH_PI ("Орехово-Борисово Южное", Prosecutor.NAGATINSKAYA_PROSECUTORS_OFFICE, Court.NAGATINSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.SOUTHERN),
+    OSTANKINSKIY_PI ("Останкинский", Prosecutor.OSTANKINSKAYA_PROSECUTORS_OFFICE, Court.OSTANKINSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.NORTH_EASTERN),
+    OTRADNOE_PI ("Отрадное", Prosecutor.BUTYRSKAYA_PROSECUTORS_OFFICE, Court.BUTYRSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.NORTHERN),
+    OCHAKOVO_MATVEEVSKOE_PI ("Очаково-Матвеевское", Prosecutor.NIKULINSKAYA_PROSECUTORS_OFFICE, Court.NIKULINSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.WESTERN),
+    PEROVO_PI ("Перово", Prosecutor.PEROVSKAYA_PROSECUTORS_OFFICE, Court.PEROVSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.EASTERN),
+    PECHATNIKI_PI ("Печатники", Prosecutor.LUBLINSKAYA_PROSECUTORS_OFFICE, Court.LUBLINSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.SOUTH_EASTERN),
+    POKROVSKOE_STRESHNEVO_PI ("Покровское - Стрешнево",	Prosecutor.TUSHINSKAYA_PROSECUTORS_OFFICE, Court.TUSHINSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.SOUTH_EASTERN),
+    PREOBRAZHENSKOE_PI ("Преображенское", Prosecutor.PREOBRAZHENSKAYA_PROSECUTORS_OFFICE, Court.PREOBRAZHENSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.EASTERN),
+    PRESNENSKIY_PI ("Пресненский", Prosecutor.PRESNENSKAYA_PROSECUTORS_OFFICE, Court.PRESNENSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.CENTRAL),
+    PROCPEKT_VERNADSKOGO_PI ("Проспект Вернадского", Prosecutor.NIKULINSKAYA_PROSECUTORS_OFFICE, Court.NIKULINSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.WESTERN),
+    RAMENKI_PI ("Раменки", Prosecutor.NIKULINSKAYA_PROSECUTORS_OFFICE, Court.NIKULINSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.WESTERN),
+    ROSTOKINO_PI ("Ростокино", Prosecutor.OSTANKINSKAYA_PROSECUTORS_OFFICE, Court.OSTANKINSKIY_COURT, DepartmentType.POLICE_INVESTIGATION, District.SOUTH_EASTERN),
     Рязанский	Кузьминс
     Савеловский	Савеловс
     Свиблово	Бабушкинс
