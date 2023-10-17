@@ -33,8 +33,8 @@ public class Investigator {
     public String toString() {
         return "Investigator{" +
                 "name='" + name + '\'' +
-                ", rank=" + rank +
-                ", department=" + department +
+                ", rank=" + rank.getTitle() +
+                ", department=" + department.getTitle() +
                 '}';
     }
 }

@@ -38,12 +38,30 @@ public class InvestigatorManager {
         return null;
     }
 
+    public Department chooseDepartment(int num){
+        List<Department> departments = new ArrayList<>(List.of(Department.values()));
+        for (int i = 0; i < departments.size(); i++) {
+            if(i == num){
+                return departments.get(i);
+            }
+        }
+        return null;
+    }
+
     public void printRanks(){
         List<InvestigatorRank> ranks = new ArrayList<>(List.of(InvestigatorRank.values()));
         for (int i = 0; i < ranks.size(); i++) {
             System.out.println(i + " --------- " + ranks.get(i).getTitle());
         }
     }
+
+    public void printDepartments(){
+        List<Department> departments = new ArrayList<>(List.of(Department.values()));
+        for (int i = 0; i < departments.size(); i++) {
+            System.out.println(i + " --------- " + departments.get(i).getTitle());
+        }
+    }
+
 
     public Investigator registration(){
         Investigator investigator = new Investigator();
@@ -71,9 +89,13 @@ public class InvestigatorManager {
         }
 
         System.out.println("Выберите отдел");
+        printDepartments();
         sc = new Scanner(System.in);
-        if (sc.hasNext()) {
-
+        if (sc.hasNextInt()) {
+            int num = sc.nextInt();
+            if(num < Department.values().length) {
+                investigator.setDepartment(chooseDepartment(num));
+            }
         } else {
             System.out.println("Неверная команда, повторите ввод");
         }
