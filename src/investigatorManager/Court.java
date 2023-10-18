@@ -41,7 +41,11 @@ public enum Court {
     SOLNCEVSKIY_COURT ("Солнцевский"),
 
     TUSHINSKIY_COURT ("Тушинский"),
-    HOROSHEVCKIY_COURT ("Хорошевский");
+    HOROSHEVCKIY_COURT ("Хорошевский"),
+
+    ZELENOGRAD("Зеленоградский"),
+    TROICKIY("Троицкий")
+    ;
 
 
     private String title;

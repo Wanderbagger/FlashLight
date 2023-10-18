@@ -1,13 +1,27 @@
 package investigatorManager;
 
 public enum District {
-    CENTRAL,
-    SOUTHERN,
-    SOUTH_WESTERN,
-    WESTERN,
-    NORTH_WESTERN,
-    NORTHERN,
-    NORTH_EASTERN,
-    EASTERN,
-    SOUTH_EASTERN
+    CENTRAL ("ЦАО"),
+    SOUTHERN("ЮАО"),
+    SOUTH_WESTERN("ЮЗАО"),
+    WESTERN("ЗАО"),
+    NORTH_WESTERN("СЗАО"),
+    NORTHERN("САО"),
+    NORTH_EASTERN("СВАО"),
+    EASTERN("ВАО"),
+    SOUTH_EASTERN("ЮВАО"),
+    MAIN_CITY(""),
+    ZELENOGRAD("ЗелАО"),
+    TINAO("ТиНАО");
+
+    private final String  title;
+
+    District(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
 }
