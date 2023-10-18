@@ -190,23 +190,14 @@ public enum Department {
     KRYUKOVO_PI("Крюково", Prosecutor.ZELENOGRAD_DISTRICT, Court.ZELENOGRAD, DepartmentType.POLICE_INVESTIGATION_TERRITORIAL, District.ZELENOGRAD),
     TROITSKIY_PI("Троицкий", Prosecutor.TINAO_DISTRICT, Court.TROICKIY, DepartmentType.POLICE_INVESTIGATION_TERRITORIAL, District.TINAO),
     KURILOSKOE_PI("Куриловское", Prosecutor.TINAO_DISTRICT, Court.TROICKIY, DepartmentType.POLICE_INVESTIGATION_TERRITORIAL, District.TINAO),
-    KRASNOSELSKOE_PI("Красносельское", Prosecutor.TINAO_DISTRICT, Court.TROICKIY, DepartmentType.POLICE_INVESTIGATION_TERRITORIAL, District.TINAO);
+    KRASNOSELSKOE_PI("Красносельское", Prosecutor.TINAO_DISTRICT, Court.TROICKIY, DepartmentType.POLICE_INVESTIGATION_TERRITORIAL, District.TINAO),
 
+    TINAO_TROICKIY_DISTRICT_PI ("Следственный отдел", Prosecutor.TINAO_DISTRICT, Court.TROICKIY, DepartmentType.POLICE_INVESTIGATION_DISTRICT, District.TINAO),
+    TINAO_TSHERBINSKIY_DISTRICT_PI ("Следственный отдел", Prosecutor.TINAO_DISTRICT, Court.TSHERBINSKIY, DepartmentType.POLICE_INVESTIGATION_DISTRICT, District.TINAO),
 
-/*
-
-
-СО СЧ по РОПД УВД по ТиНао г. Москвы (Т)	Прокурор ТАО г. Москвы	Троицкий районный суд г. Москвы
-СО СЧ по РОПД УВД по ТиНао г. Москвы (Н)	Прокурор НАО г. Москвы	Щербинский районный суд г. Москвы
-СО Отдела МВД России по району Коммунарский г. Москвы	Прокурор НАО г. Москвы	Щербинский районный суд г. Москвы
-СО Отдела МВД России по району Московский г. Москвы 	Прокурор НАО г. Москвы	Щербинский районный суд г. Москвы
-СО Отдела МВД России по району Щербинский г. Москвы	Прокурор НАО г. Москвы	Щербинский районный суд г. Москвы
-СУ УВД России на Московском метрополитене	Прокурор Московского метрополитена
-
- */
-
-
-
+    KOMMUNARSKIY_PI("Коммунарский", Prosecutor.TINAO_DISTRICT, Court.TSHERBINSKIY, DepartmentType.POLICE_INVESTIGATION_TERRITORIAL, District.TINAO),
+    MOSKOVSKIY_PI("Московский", Prosecutor.TINAO_DISTRICT, Court.TSHERBINSKIY, DepartmentType.POLICE_INVESTIGATION_TERRITORIAL, District.TINAO),
+    TSHERBINSKIY_PI("Щербинский", Prosecutor.TINAO_DISTRICT, Court.TSHERBINSKIY, DepartmentType.POLICE_INVESTIGATION_TERRITORIAL, District.TINAO);
 
     private final String title;
     private final Prosecutor prosecutor;

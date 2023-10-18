@@ -44,7 +44,8 @@ public enum Court {
     HOROSHEVCKIY_COURT ("Хорошевский"),
 
     ZELENOGRAD("Зеленоградский"),
-    TROICKIY("Троицкий")
+    TROICKIY("Троицкий"),
+    TSHERBINSKIY("Щербинский")
     ;
 
 
