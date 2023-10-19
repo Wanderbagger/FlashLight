@@ -1,28 +1,32 @@
-package investigatorManager;
+package manager.investigatorManager;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 public class InvestigatorManager {
-    List <Investigator> investigators = new ArrayList<>(List.of());
+    List <Investigator> investigators = new ArrayList<>();
 
     public Investigator chooseInvestigator(){
+        investigators.add(new Investigator("Шляхов Юрий Олегович", InvestigatorRank.LIEUTENANT, Department.ARBAT_PI));
         Investigator currentInvestigator = null;
+        System.out.println(investigators);
         System.out.println("ВЫБОР СЛЕДОВАТЕЛЯ");
         System.out.println("Введите фамилию следователя");
         Scanner sc = new Scanner(System.in);
         if (sc.hasNext()) {
-            String surname = sc.nextLine();
+            String name = sc.nextLine();
             for (Investigator investigator : investigators) {
-                if(investigator.getName().startsWith(surname)){
+                if(investigator.getName().startsWith(name)){
+                    System.out.println("Следователь " + investigator.getName() + " найден в базе");
                     currentInvestigator = investigator;
                 }
             }
         }
         if(currentInvestigator == null){
+            System.out.println("Следователь не найден, необходимо зарегистрироваться");
             currentInvestigator = registration();
+            investigators.add(currentInvestigator);
         }
         System.out.println(currentInvestigator);
         return currentInvestigator;
@@ -64,15 +68,13 @@ public class InvestigatorManager {
 
 
     public Investigator registration(){
-        Investigator investigator = new Investigator();
+        Investigator investigator = new Investigator(null, null, null);
         System.out.println("РЕГИСТРАЦИЯ СЛЕДОВАТЕЛЯ");
         System.out.println("Введите фамилию, имя, отчество следователя");
         Scanner sc = new Scanner(System.in);
         if (sc.hasNext()) {
             String name = sc.nextLine();
-            System.out.println(name);
             investigator.setName(name);
-
         } else {
         System.out.println("Неверная команда, повторите ввод");
     }
@@ -87,18 +89,23 @@ public class InvestigatorManager {
         } else {
             System.out.println("Неверная команда, повторите ввод");
         }
-
         System.out.println("Выберите отдел");
         printDepartments();
         sc = new Scanner(System.in);
         if (sc.hasNextInt()) {
             int num = sc.nextInt();
             if(num < Department.values().length) {
-                investigator.setDepartment(chooseDepartment(num));
+                 investigator.setDepartment(chooseDepartment(num));
             }
         } else {
             System.out.println("Неверная команда, повторите ввод");
         }
-        return investigator;
+        if(investigator.getName() != null && investigator.getRank() != null && investigator.getDepartment() != null) {
+
+            System.out.println(investigators);
+            return investigator;
+        }
+        System.out.println("Ошибка, повторите регистрацию");
+        return null;
     }
 }

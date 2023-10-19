@@ -1,12 +1,14 @@
 package manager;
 
-import investigatorManager.InvestigatorManager;
+import manager.investigatorManager.InvestigatorManager;
 
 import java.util.Scanner;
 
 public class MenuManager {
     public void start() {
+        InvestigatorManager investigatorManager = new InvestigatorManager();
         while (true) {
+
             System.out.println("Что вы хотите сделать?");
             System.out.println("1 - возбуждение нового уголовного дела");
             System.out.println("2 - произвести новые действия по старому делу");
@@ -24,7 +26,6 @@ public class MenuManager {
                     System.out.println("ИНФОРМАЦИЯ");
                 } else if (number == 4) {
                     System.out.println("Выбрать следователя");
-                    InvestigatorManager investigatorManager = new InvestigatorManager();
                     investigatorManager.chooseInvestigator();
 
                 } else if (number == 0) {

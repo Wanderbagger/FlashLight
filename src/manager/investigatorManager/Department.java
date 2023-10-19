@@ -1,4 +1,4 @@
-package investigatorManager;
+package manager.investigatorManager;
 
 public enum Department {
 
@@ -188,6 +188,7 @@ public enum Department {
     MATUSHKINO_SAVELKI_PI("Матушкино-Савелки", Prosecutor.ZELENOGRAD_DISTRICT, Court.ZELENOGRAD, DepartmentType.POLICE_INVESTIGATION_TERRITORIAL, District.ZELENOGRAD),
     SILINO_STAROE_KRYUKOVO_PI("Силино и Старое Крюково", Prosecutor.ZELENOGRAD_DISTRICT, Court.ZELENOGRAD, DepartmentType.POLICE_INVESTIGATION_TERRITORIAL, District.ZELENOGRAD),
     KRYUKOVO_PI("Крюково", Prosecutor.ZELENOGRAD_DISTRICT, Court.ZELENOGRAD, DepartmentType.POLICE_INVESTIGATION_TERRITORIAL, District.ZELENOGRAD),
+
     TROITSKIY_PI("Троицкий", Prosecutor.TINAO_DISTRICT, Court.TROICKIY, DepartmentType.POLICE_INVESTIGATION_TERRITORIAL, District.TINAO),
     KURILOSKOE_PI("Куриловское", Prosecutor.TINAO_DISTRICT, Court.TROICKIY, DepartmentType.POLICE_INVESTIGATION_TERRITORIAL, District.TINAO),
     KRASNOSELSKOE_PI("Красносельское", Prosecutor.TINAO_DISTRICT, Court.TROICKIY, DepartmentType.POLICE_INVESTIGATION_TERRITORIAL, District.TINAO),

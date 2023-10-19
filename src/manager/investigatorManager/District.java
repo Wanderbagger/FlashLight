@@ -1,4 +1,4 @@
-package investigatorManager;
+package manager.investigatorManager;
 
 public enum District {
     CENTRAL ("ЦАО"),

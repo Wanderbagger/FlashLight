@@ -1,7 +1,4 @@
-package investigatorManager;
-
-import java.util.ArrayList;
-import java.util.List;
+package manager.investigatorManager;
 
 public enum InvestigatorRank {
     JUNIOR_LIEUTENANT ("младший лейтенант"),

@@ -29,9 +29,12 @@ public class LawRulesManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        /*
         for (Article article : articleArrayList) {
             System.out.println(article);
         }
+
+         */
     }
 
     private void recognize(String line) { // распознавание

@@ -1,8 +1,8 @@
 package manager.CriminalCaseManager;
 
-import manager.CriminalCaseManager.ProceduralDesicion.ProceduralDecision;
+import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecision;
 import manager.LawRuleManager.Article;
-import investigatorManager.Investigator;
+import manager.investigatorManager.Investigator;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

@@ -1,11 +1,12 @@
-package manager.CriminalCaseManager.ProceduralDesicion;
+package manager.CriminalCaseManager.ProceduralDesicionManager;
 
-import investigatorManager.Investigator;
+import manager.investigatorManager.Investigator;
 
 import java.time.LocalDateTime;
 
 public abstract class ProceduralDecision {
     LocalDateTime dateTime;
     Investigator investigator;
+    String Place;
 
 }

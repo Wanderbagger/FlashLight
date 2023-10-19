@@ -1,4 +1,4 @@
-package investigatorManager;
+package manager.investigatorManager;
 
 public enum Prosecutor {
     CENTRAL_ADMINISRATIVE_DISTRICT ("Центрального административного округа"),

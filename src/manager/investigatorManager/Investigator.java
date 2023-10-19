@@ -1,4 +1,4 @@
-package investigatorManager;
+package manager.investigatorManager;
 
 public class Investigator {
     String name; // ФИО следователя
@@ -36,5 +36,11 @@ public class Investigator {
                 ", rank=" + rank.getTitle() +
                 ", department=" + department.getTitle() +
                 '}';
+    }
+
+    public Investigator(String name, InvestigatorRank rank, Department department) {
+        this.name = name;
+        this.rank = rank;
+        this.department = department;
     }
 }
