@@ -6,20 +6,42 @@ import manager.investigatorManager.Investigator;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CriminalCase {
     private Investigator currentInvestigator; // текущий следователь по делу
-    private ArrayList<Investigator>investigators; // следователи, которые вели расследование по делу
-    private ArrayList <Article> articles; // статьи уголовного кодекса
-    private ArrayList <Victim> victims; // потерпевшие по уголовному делу
-    private ArrayList <Suspect> suspects; // фигуранты по уголовному делу
-    private ArrayList <Expertise> expertiseArrayList; // экспертизы по уголовному делу
+    private List<Investigator> investigators = new ArrayList<>(); // следователи, которые вели расследование по делу
+    private List <Article> articles = new ArrayList<>(); // статьи уголовного кодекса
+    private List <Victim> victims = new ArrayList<>(); // потерпевшие по уголовному делу
+    private List <Suspect> suspects= new ArrayList<>(); // фигуранты по уголовному делу
+    private List <Expertise> expertiseArrayList = new ArrayList<>(); // экспертизы по уголовному делу
     private LocalDateTime proceduralTerm; // процессуальный срок по делу
-    private ArrayList <ProceduralDecision> proceduralDecisions; // принятые процессуальные решения по делу;
+    private List <ProceduralDecision> proceduralDecisions = new ArrayList<>(); // принятые процессуальные решения по делу;
     private String accusationPlot; // фабула уголовного дела
     private String id;
     private LocalDateTime startDate; // дата возбуждения уголовного дела
-    private boolean isUnderway = false;
+    private boolean isUnderway = false; // ведется расследование
+
+    public CriminalCase(Investigator currentInvestigator,
+                        LocalDateTime proceduralTerm,
+                        String accusationPlot,
+                        String id,
+                        ArrayList <Article> articles,
+                        Victim victim,
+                        Suspect suspect,
+                        LocalDateTime startDate,
+                        boolean isUnderway) {
+        this.investigators.add(currentInvestigator);
+        this.victims.add(victim);
+        this.suspects.add(suspect);
+        this.articles = articles;
+        this.currentInvestigator = currentInvestigator;
+        this.proceduralTerm = startDate.plusMonths(2);
+        this.accusationPlot = accusationPlot;
+        this.id = id;
+        this.startDate = startDate;
+        this.isUnderway = isUnderway;
+    }
 
     public Investigator getCurrentInvestigator() {
         return currentInvestigator;
@@ -34,7 +56,7 @@ public class CriminalCase {
         this.currentInvestigator = currentInvestigator;
     }
 
-    public ArrayList<Investigator> getInvestigators() {
+    public List<Investigator> getInvestigators() {
         return investigators;
     }
 
@@ -48,7 +70,7 @@ public class CriminalCase {
     }
 
 
-    public ArrayList<Article> getArticles() {
+    public List<Article> getArticles() {
         return articles;
     }
 
@@ -56,23 +78,23 @@ public class CriminalCase {
         this.articles = articles;
     }
 
-    public ArrayList<Victim> getVictims() {
+    public List<Victim> getVictims() {
         return victims;
     }
 
-    public void setVictims(ArrayList<Victim> victims) {
+    public void setVictims(List<Victim> victims) {
         this.victims = victims;
     }
 
-    public ArrayList<Suspect> getSuspects() {
+    public List<Suspect> getSuspects() {
         return suspects;
     }
 
-    public void setSuspects(ArrayList<Suspect> suspects) {
+    public void setSuspects(List<Suspect> suspects) {
         this.suspects = suspects;
     }
 
-    public ArrayList<Expertise> getExpertiseArrayList() {
+    public List<Expertise> getExpertiseArrayList() {
         return expertiseArrayList;
     }
 
@@ -88,7 +110,7 @@ public class CriminalCase {
         this.proceduralTerm = proceduralTerm;
     }
 
-    public ArrayList<ProceduralDecision> getProceduralDecisions() {
+    public List<ProceduralDecision> getProceduralDecisions() {
         return proceduralDecisions;
     }
 

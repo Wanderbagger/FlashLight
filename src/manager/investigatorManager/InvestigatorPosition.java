@@ -16,7 +16,7 @@ public enum InvestigatorPosition {
     }
 
     public String getTitle() {
-        return title + " юстиции";
+        return title;
     }
 
 

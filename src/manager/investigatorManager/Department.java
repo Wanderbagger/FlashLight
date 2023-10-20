@@ -214,6 +214,10 @@ public enum Department {
         this.district = district;
     }
 
+    public DepartmentType getDepartmentType() {
+        return departmentType;
+    }
+
     public String getTitle() {
         if (departmentType.equals(DepartmentType.POLICE_INVESTIGATION_TERRITORIAL)) {
             return "СО Отдела МВД России по району " + title + " г. Москвы";
