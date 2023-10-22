@@ -12,7 +12,7 @@ public class InMemoryCriminalCaseManager implements CriminalCaseManager{
 
     @Override
     public void addNewCase(Investigator investigator) {
-        CriminalCase criminalCase = new CriminalCase();
+CriminalCase criminalCase = new CriminalCase(investigator, (LocalDateTime.now().plusMonths(2)), null, null, null, null, null, null)
         criminalCase.setStartDate(LocalDateTime.now());
         criminalCase.setCurrentInvestigator(investigator);
         System.out.println("Введите номер уголовного дела");
