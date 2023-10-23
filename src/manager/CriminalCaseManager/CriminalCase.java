@@ -22,131 +22,122 @@ public class CriminalCase {
     private LocalDateTime startDate; // дата возбуждения уголовного дела
     private boolean isUnderway = false; // ведется расследование
 
-    public CriminalCase(Investigator currentInvestigator,
-                        LocalDateTime proceduralTerm,
-                        String accusationPlot,
-                        String id,
-                        ArrayList <Article> articles,
-                        Victim victim,
-                        Suspect suspect,
-                        LocalDateTime startDate,
-                        boolean isUnderway) {
-        this.investigators.add(currentInvestigator);
-        this.victims.add(victim);
-        this.suspects.add(suspect);
-        this.articles = articles;
-        this.currentInvestigator = currentInvestigator;
-        this.proceduralTerm = startDate.plusMonths(2);
-        this.accusationPlot = accusationPlot;
-        this.id = id;
-        this.startDate = startDate;
-        this.isUnderway = isUnderway;
-    }
+        public CriminalCase(CriminalCaseBuilder criminalCaseBuilder) {
+            if (criminalCaseBuilder == null) {
+                throw new IllegalArgumentException("Ошибка, отсутствует Builder");
+            }
+            if (
+                    criminalCaseBuilder.currentInvestigator.equals(null) ||
+                            criminalCaseBuilder.id.equals(null) ||
+                            criminalCaseBuilder.startDate.equals(null) ||
+                            criminalCaseBuilder.articles.isEmpty() ||
+                            criminalCaseBuilder.accusationPlot.equals(null)
+            ) {
+                throw new IllegalArgumentException("Please provide valid employee number.");
+            }
+            this.currentInvestigator = criminalCaseBuilder.currentInvestigator;
+            this.id = criminalCaseBuilder.id;
+            this.startDate = criminalCaseBuilder.startDate;
+            this.articles = criminalCaseBuilder.articles;
+            this.accusationPlot = criminalCaseBuilder.accusationPlot;
 
-    public Investigator getCurrentInvestigator() {
-        return currentInvestigator;
-    }
+        }
 
-    public String getNumber() {
-        return id;
-    }
+        public int getEmpNo() {
+            return empNo;
+        }
 
+        public String getName() {
+            return name;
+        }
 
-    public void setCurrentInvestigator(Investigator currentInvestigator) {
-        this.currentInvestigator = currentInvestigator;
-    }
+        public String getDepttName() {
+            return depttName;
+        }
 
-    public List<Investigator> getInvestigators() {
-        return investigators;
-    }
+        public int getSalary() {
+            return salary;
+        }
 
-    public void addInvestigator(Investigator investigator) {
+        public int getMgrEmpNo() {
+            return mgrEmpNo;
+        }
 
-        investigators.add(investigator);
-    }
+        public String getProjectName() {
+            return projectName;
+        }
 
-    public void deleteInvestigator(Investigator investigator) {
-        investigators.remove(investigator);
-    }
+        @Override
+        public String toString() {
+            // Класс StringBuilder также использует паттерн проектирования Builder с реализацией
+            // интерфейса java.lang.Appendable
+            StringBuilder builder = new StringBuilder();
+            builder.append("Employee [empNo=").append(empNo).append(", name=").append(name).append(", depttName=")
+                    .append(depttName).append(", salary=").append(salary).append(", mgrEmpNo=").append(mgrEmpNo)
+                    .append(", projectName=").append(projectName).append("]");
+            return builder.toString();
+        }
 
+        public static class CriminalCaseBuilder {
+            private Investigator currentInvestigator; // текущий следователь по делу
+            private List<Investigator> investigators = new ArrayList<>(); // следователи, которые вели расследование по делу
+            private List <Article> articles = new ArrayList<>(); // статьи уголовного кодекса
+            private List <Victim> victims = new ArrayList<>(); // потерпевшие по уголовному делу
+            private List <Suspect> suspects= new ArrayList<>(); // фигуранты по уголовному делу
+            private List <Expertise> expertiseArrayList = new ArrayList<>(); // экспертизы по уголовному делу
+            private LocalDateTime proceduralTerm; // процессуальный срок по делу
+            private List <ProceduralDecision> proceduralDecisions = new ArrayList<>(); // принятые процессуальные решения по делу;
+            private String accusationPlot; // фабула уголовного дела
+            private String id;
+            private LocalDateTime startDate; // дата возбуждения уголовного дела
+            private boolean isUnderway = false; // ведется расследование
 
-    public List<Article> getArticles() {
-        return articles;
-    }
+            public CriminalCaseBuilder() {
+                super();
+            }
 
-    public void setArticles(ArrayList<Article> articles) {
-        this.articles = articles;
-    }
+            public EmployeeBuilder empNo(int empNo) {
+                this.empNo = empNo;
+                return this;
+            }
 
-    public List<Victim> getVictims() {
-        return victims;
-    }
+            public EmployeeBuilder name(String name) {
+                this.name = name;
+                return this;
+            }
 
-    public void setVictims(List<Victim> victims) {
-        this.victims = victims;
-    }
+            public EmployeeBuilder depttName(String depttName) {
+                this.depttName = depttName;
+                return this;
+            }
 
-    public List<Suspect> getSuspects() {
-        return suspects;
-    }
+            public EmployeeBuilder salary(int salary) {
+                this.salary = salary;
+                return this;
+            }
 
-    public void setSuspects(List<Suspect> suspects) {
-        this.suspects = suspects;
-    }
+            public EmployeeBuilder mgrEmpNo(int mgrEmpNo) {
+                this.mgrEmpNo = mgrEmpNo;
+                return this;
+            }
+            public EmployeeBuilder projectName(String projectName) {
+                this.projectName = projectName;
+                return this;
+            }
 
-    public List<Expertise> getExpertiseArrayList() {
-        return expertiseArrayList;
-    }
+            public Employee build() {
+                Employee emp = null;
+                if (validateEmployee()) {
+                    emp = new Employee(this);
+                } else {
+                    System.out.println("Sorry! Employee objects can't be build without required details");
+                }
+                return emp;
+            }
 
-    public void setExpertiseArrayList(ArrayList<Expertise> expertiseArrayList) {
-        this.expertiseArrayList = expertiseArrayList;
-    }
-
-    public LocalDateTime getProceduralTerm() {
-        return proceduralTerm;
-    }
-
-    public void setProceduralTerm(LocalDateTime proceduralTerm) {
-        this.proceduralTerm = proceduralTerm;
-    }
-
-    public List<ProceduralDecision> getProceduralDecisions() {
-        return proceduralDecisions;
-    }
-
-    public void setProceduralDecisions(ArrayList<ProceduralDecision> proceduralDecisions) {
-        this.proceduralDecisions = proceduralDecisions;
-    }
-
-    public String getAccusationPlot() {
-        return accusationPlot;
-    }
-
-    public void setAccusationPlot(String accusationPlot) {
-        this.accusationPlot = accusationPlot;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDateTime startDate) {
-        this.startDate = startDate;
-    }
-
-    public boolean isUnderway() {
-        return isUnderway;
-    }
-
-    public void setUnderway(boolean underway) {
-        isUnderway = underway;
+            private boolean validateEmployee() {
+                return (empNo > 0 && name != null && !name.trim().isEmpty());
+            }
+        }
     }
 }
