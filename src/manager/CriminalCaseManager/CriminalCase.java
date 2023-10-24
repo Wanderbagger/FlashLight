@@ -1,6 +1,7 @@
 package manager.CriminalCaseManager;
 
 import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecision;
+import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecisions;
 import manager.LawRuleManager.Article;
 import manager.investigatorManager.Investigator;
 
@@ -10,134 +11,100 @@ import java.util.List;
 
 public class CriminalCase {
     private Investigator currentInvestigator; // текущий следователь по делу
-    private List<Investigator> investigators = new ArrayList<>(); // следователи, которые вели расследование по делу
-    private List <Article> articles = new ArrayList<>(); // статьи уголовного кодекса
-    private List <Victim> victims = new ArrayList<>(); // потерпевшие по уголовному делу
-    private List <Suspect> suspects= new ArrayList<>(); // фигуранты по уголовному делу
-    private List <Expertise> expertiseArrayList = new ArrayList<>(); // экспертизы по уголовному делу
-    private LocalDateTime proceduralTerm; // процессуальный срок по делу
-    private List <ProceduralDecision> proceduralDecisions = new ArrayList<>(); // принятые процессуальные решения по делу;
+    private Article article; // статьи уголовного кодекса
+    private Victim victim; // потерпевшие по уголовному делу
+    private Suspect suspect; // фигуранты по уголовному делу
+    private Expertise expertise; // экспертизы по уголовному делу
+    private ProceduralDecisions proceduralDecision; // принятые процессуальные решения по делу;
     private String accusationPlot; // фабула уголовного дела
-    private String id;
+    private long id;
     private LocalDateTime startDate; // дата возбуждения уголовного дела
+    private LocalDateTime proceduralTerm; // процессуальный срок по делу
     private boolean isUnderway = false; // ведется расследование
 
         public CriminalCase(CriminalCaseBuilder criminalCaseBuilder) {
             if (criminalCaseBuilder == null) {
                 throw new IllegalArgumentException("Ошибка, отсутствует Builder");
-            }
-            if (
-                    criminalCaseBuilder.currentInvestigator.equals(null) ||
-                            criminalCaseBuilder.id.equals(null) ||
+            } if (criminalCaseBuilder.currentInvestigator.equals(null) ||
+                            criminalCaseBuilder.id == 0 ||
                             criminalCaseBuilder.startDate.equals(null) ||
-                            criminalCaseBuilder.articles.isEmpty() ||
+                            criminalCaseBuilder.article.equals(null) ||
                             criminalCaseBuilder.accusationPlot.equals(null)
             ) {
-                throw new IllegalArgumentException("Please provide valid employee number.");
+                throw new IllegalArgumentException("Ошибка, поля не заполнены");
             }
             this.currentInvestigator = criminalCaseBuilder.currentInvestigator;
             this.id = criminalCaseBuilder.id;
             this.startDate = criminalCaseBuilder.startDate;
-            this.articles = criminalCaseBuilder.articles;
+            this.article = criminalCaseBuilder.article;
             this.accusationPlot = criminalCaseBuilder.accusationPlot;
-
+            this.proceduralDecision = ProceduralDecisions.INITIATION;
+            this.isUnderway = true;
         }
 
-        public int getEmpNo() {
-            return empNo;
-        }
 
-        public String getName() {
-            return name;
-        }
+    @Override
+    public String toString() {
+        return "CriminalCase{" +
+                "currentInvestigator=" + currentInvestigator +
+                ", article=" + article +
+                ", victim=" + victim +
+                ", suspect=" + suspect +
+                ", expertise=" + expertise +
+                ", proceduralDecision=" + proceduralDecision +
+                ", accusationPlot='" + accusationPlot + '\'' +
+                ", id=" + id +
+                ", startDate=" + startDate +
+                ", proceduralTerm=" + proceduralTerm +
+                ", isUnderway=" + isUnderway +
+                '}';
+    }
 
-        public String getDepttName() {
-            return depttName;
-        }
-
-        public int getSalary() {
-            return salary;
-        }
-
-        public int getMgrEmpNo() {
-            return mgrEmpNo;
-        }
-
-        public String getProjectName() {
-            return projectName;
-        }
-
-        @Override
-        public String toString() {
-            // Класс StringBuilder также использует паттерн проектирования Builder с реализацией
-            // интерфейса java.lang.Appendable
-            StringBuilder builder = new StringBuilder();
-            builder.append("Employee [empNo=").append(empNo).append(", name=").append(name).append(", depttName=")
-                    .append(depttName).append(", salary=").append(salary).append(", mgrEmpNo=").append(mgrEmpNo)
-                    .append(", projectName=").append(projectName).append("]");
-            return builder.toString();
-        }
-
-        public static class CriminalCaseBuilder {
+    public static class CriminalCaseBuilder {
             private Investigator currentInvestigator; // текущий следователь по делу
-            private List<Investigator> investigators = new ArrayList<>(); // следователи, которые вели расследование по делу
-            private List <Article> articles = new ArrayList<>(); // статьи уголовного кодекса
-            private List <Victim> victims = new ArrayList<>(); // потерпевшие по уголовному делу
-            private List <Suspect> suspects= new ArrayList<>(); // фигуранты по уголовному делу
-            private List <Expertise> expertiseArrayList = new ArrayList<>(); // экспертизы по уголовному делу
-            private LocalDateTime proceduralTerm; // процессуальный срок по делу
-            private List <ProceduralDecision> proceduralDecisions = new ArrayList<>(); // принятые процессуальные решения по делу;
+            private Article article; // статьи уголовного кодекса
+            private Victim victim; // потерпевшие по уголовному делу
+            private Suspect suspect; // фигуранты по уголовному делу
+            private Expertise expertise; // экспертизы по уголовному делу
+            private ProceduralDecisions proceduralDecisions; // принятые процессуальные решения по делу;
             private String accusationPlot; // фабула уголовного дела
-            private String id;
+            private long id;
             private LocalDateTime startDate; // дата возбуждения уголовного дела
+            private LocalDateTime proceduralTerm; // процессуальный срок по делу
             private boolean isUnderway = false; // ведется расследование
 
             public CriminalCaseBuilder() {
                 super();
             }
 
-            public EmployeeBuilder empNo(int empNo) {
-                this.empNo = empNo;
+            public CriminalCaseBuilder currentInvestigator(Investigator currentInvestigator) {
+                this.currentInvestigator = currentInvestigator;
                 return this;
             }
 
-            public EmployeeBuilder name(String name) {
-                this.name = name;
+            public CriminalCaseBuilder article (Article article) {
+                this.article = article;
                 return this;
             }
 
-            public EmployeeBuilder depttName(String depttName) {
-                this.depttName = depttName;
+            public CriminalCaseBuilder victim (Victim victim) {
+                this.victim = victim;
                 return this;
             }
 
-            public EmployeeBuilder salary(int salary) {
-                this.salary = salary;
+            public CriminalCaseBuilder suspect (Suspect suspect) {
+                this.suspect = suspect;
                 return this;
             }
 
-            public EmployeeBuilder mgrEmpNo(int mgrEmpNo) {
-                this.mgrEmpNo = mgrEmpNo;
-                return this;
-            }
-            public EmployeeBuilder projectName(String projectName) {
-                this.projectName = projectName;
+            public CriminalCaseBuilder expertise (Expertise expertise) {
+                this.expertise = expertise;
                 return this;
             }
 
-            public Employee build() {
-                Employee emp = null;
-                if (validateEmployee()) {
-                    emp = new Employee(this);
-                } else {
-                    System.out.println("Sorry! Employee objects can't be build without required details");
-                }
-                return emp;
+            public CriminalCaseBuilder proceduralDecisions (ProceduralDecisions proceduralDecision) {
+                this.proceduralDecisions = proceduralDecision;
+                return this;
             }
-
-            private boolean validateEmployee() {
-                return (empNo > 0 && name != null && !name.trim().isEmpty());
-            }
-        }
     }
 }
