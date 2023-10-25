@@ -102,9 +102,9 @@ public class CriminalCase {
                 return this;
             }
 
-        public String accusationPlot (String accusationPlot) {
+        public CriminalCaseBuilder accusationPlot (String accusationPlot) {
             this.accusationPlot = accusationPlot;
-            return this.accusationPlot;
+            return this;
         }
 
             public CriminalCaseBuilder proceduralDecisions (ProceduralDecisions proceduralDecision) {
@@ -112,7 +112,27 @@ public class CriminalCase {
                 return this;
             }
 
-            public boolean validateCriminalCase(){
+            public CriminalCaseBuilder id(long id){
+                this.id = id;
+                return this;
+            }
+        public CriminalCaseBuilder startDate(LocalDateTime startDate){
+            this.startDate = startDate;
+            return this;
+        }
+        public CriminalCaseBuilder proceduralTerm(LocalDateTime proceduralTerm){
+            this.proceduralTerm = proceduralTerm;
+            return this;
+        }
+
+        public CriminalCaseBuilder isUnderWay(boolean isUnderway){
+            this.isUnderway = isUnderway;
+            return this;
+        }
+
+
+
+        public boolean validateCriminalCase(){
                 return !this.currentInvestigator.equals(null) &&
                         this.id != 0 &&
                         !this.startDate.equals(null) &&

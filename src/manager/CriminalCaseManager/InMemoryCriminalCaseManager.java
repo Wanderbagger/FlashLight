@@ -11,23 +11,6 @@ import java.util.*;
 public class InMemoryCriminalCaseManager implements CriminalCaseManager{
 
     private Map<String, CriminalCase> criminalCaseMap;
-/*
-    private Investigator currentInvestigator; // текущий следователь по делу
-    private Article article; // статьи уголовного кодекса
-    private Victim victim; // потерпевшие по уголовному делу
-    private Suspect suspect; // фигуранты по уголовному делу
-    private Expertise expertise; // экспертизы по уголовному делу
-    private ProceduralDecisions proceduralDecision; // принятые процессуальные решения по делу;
-    private String accusationPlot; // фабула уголовного дела
-    private long id;
-    private LocalDateTime startDate; // дата возбуждения уголовного дела
-    private LocalDateTime proceduralTerm; // процессуальный срок по делу
-    private boolean isUnderway = false; // ведется расследование
-  */
-
-
-
-
 
     @Override
     public void addNewCase(Investigator investigator) {
@@ -43,7 +26,8 @@ public class InMemoryCriminalCaseManager implements CriminalCaseManager{
         boolean isUnderway = true;
 
         CriminalCase criminalCase = new CriminalCase.CriminalCaseBuilder().currentInvestigator(investigator).article(article).victim(victim).
-                suspect(suspect).expertise(expertise).proceduralDecisions(proceduralDecisions).accusationPlot(accusationPlot)..build().;
+                suspect(suspect).expertise(expertise).proceduralDecisions(proceduralDecisions).accusationPlot(accusationPlot).id(id).startDate(startDate).
+                proceduralTerm(proceduralTerm).isUnderWay(isUnderway).build();
 
     }
 
