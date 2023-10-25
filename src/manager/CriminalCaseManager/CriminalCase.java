@@ -102,9 +102,32 @@ public class CriminalCase {
                 return this;
             }
 
+        public String accusationPlot (String accusationPlot) {
+            this.accusationPlot = accusationPlot;
+            return this.accusationPlot;
+        }
+
             public CriminalCaseBuilder proceduralDecisions (ProceduralDecisions proceduralDecision) {
                 this.proceduralDecisions = proceduralDecision;
                 return this;
             }
+
+            public boolean validateCriminalCase(){
+                return !this.currentInvestigator.equals(null) &&
+                        this.id != 0 &&
+                        !this.startDate.equals(null) &&
+                        !this.article.equals(null) &&
+                        !this.accusationPlot.equals(null);
+            }
+
+            public CriminalCase build() {
+            CriminalCase criminalCase = null;
+            if (validateCriminalCase()) {
+                criminalCase = new CriminalCase(this);
+            } else {
+                System.out.println("Уголовное дело не прошло валидацию");
+            }
+            return criminalCase;
+        }
     }
 }

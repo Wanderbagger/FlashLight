@@ -1,5 +1,7 @@
 package manager.CriminalCaseManager;
 
+import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecisions;
+import manager.LawRuleManager.Article;
 import manager.investigatorManager.Investigator;
 import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecision;
 
@@ -7,24 +9,42 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class InMemoryCriminalCaseManager implements CriminalCaseManager{
-    private final Comparator<CriminalCase> criminalCaseComparator = Comparator.comparing(CriminalCase::getNumber);
+
     private Map<String, CriminalCase> criminalCaseMap;
+/*
+    private Investigator currentInvestigator; // текущий следователь по делу
+    private Article article; // статьи уголовного кодекса
+    private Victim victim; // потерпевшие по уголовному делу
+    private Suspect suspect; // фигуранты по уголовному делу
+    private Expertise expertise; // экспертизы по уголовному делу
+    private ProceduralDecisions proceduralDecision; // принятые процессуальные решения по делу;
+    private String accusationPlot; // фабула уголовного дела
+    private long id;
+    private LocalDateTime startDate; // дата возбуждения уголовного дела
+    private LocalDateTime proceduralTerm; // процессуальный срок по делу
+    private boolean isUnderway = false; // ведется расследование
+  */
+
+
+
+
 
     @Override
     public void addNewCase(Investigator investigator) {
-CriminalCase criminalCase = new CriminalCase(investigator, (LocalDateTime.now().plusMonths(2)), null, null, null, null, null, null)
-        criminalCase.setStartDate(LocalDateTime.now());
-        criminalCase.setCurrentInvestigator(investigator);
-        System.out.println("Введите номер уголовного дела");
-        System.out.println("Введите статью");
-        System.out.println("Введите место возбуждения уголовного дела");
-        System.out.println("Введите номер КУСП");
-        System.out.println("Введите фабулу уголовного дела");
-        System.out.println("Введите данные фигуранта");
-        System.out.println("Введите данные потерпевшего");
-        if(!criminalCaseMap.containsKey(criminalCase.getNumber()) && criminalCase != null){
-            criminalCaseMap.put(criminalCase.getNumber(), criminalCase);
-        }
+        Article article = new Article();
+        Victim victim = new Victim();
+        Suspect suspect = new Suspect();
+        Expertise expertise = new Expertise();
+        ProceduralDecisions proceduralDecisions = ProceduralDecisions.INITIATION;
+        String accusationPlot = "";
+        long id = 0;
+        LocalDateTime startDate = LocalDateTime.now();
+        LocalDateTime proceduralTerm = startDate.plusMonths(2);
+        boolean isUnderway = true;
+
+        CriminalCase criminalCase = new CriminalCase.CriminalCaseBuilder().currentInvestigator(investigator).article(article).victim(victim).
+                suspect(suspect).expertise(expertise).proceduralDecisions(proceduralDecisions).accusationPlot(accusationPlot)..build().;
+
     }
 
     @Override
