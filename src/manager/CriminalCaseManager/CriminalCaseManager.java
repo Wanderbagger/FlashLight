@@ -10,13 +10,13 @@ public interface CriminalCaseManager {
 
     void addNewCase(Investigator investigator);
 
-    void deleteCase(String caseId);
+    void deleteCase(long caseId);
 
-    void printCase(String caseId);
+    void printCase(long caseId);
 
     void updateCase(CriminalCase CriminalCase);
 
-    CriminalCase getCaseById(String caseId);
+    CriminalCase getCaseById(long caseId);
 
     void save();
 

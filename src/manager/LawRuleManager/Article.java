@@ -18,4 +18,23 @@ public class Article extends LawRule{
             System.out.println(part);
         }
     }
+
+    public ArrayList<Part> getParts() {
+        return parts;
+    }
+
+    public Part getPart(String number){
+        for (Part part : parts) {
+            if(part.getNumber().equals(number)){
+                return part;
+            }
+        }
+        return null;
+    }
+
+    public void setParts(Part part) {
+        this.parts.clear();
+        this.parts.add(part);
+    }
+
 }

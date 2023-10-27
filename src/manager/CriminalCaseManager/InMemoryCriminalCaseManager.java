@@ -2,15 +2,17 @@ package manager.CriminalCaseManager;
 
 import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecisions;
 import manager.LawRuleManager.Article;
+import manager.LawRuleManager.Part;
 import manager.investigatorManager.Investigator;
 import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecision;
+import manager.LawRuleManager.LawRulesManager;
 
 import java.time.LocalDateTime;
 import java.util.*;
 
 public class InMemoryCriminalCaseManager implements CriminalCaseManager{
 
-    private Map<String, CriminalCase> criminalCaseMap;
+    private Map<Long, CriminalCase> criminalCaseMap;
 
     @Override
     public void addNewCase(Investigator investigator) {
@@ -28,16 +30,59 @@ public class InMemoryCriminalCaseManager implements CriminalCaseManager{
         CriminalCase criminalCase = new CriminalCase.CriminalCaseBuilder().currentInvestigator(investigator).article(article).victim(victim).
                 suspect(suspect).expertise(expertise).proceduralDecisions(proceduralDecisions).accusationPlot(accusationPlot).id(id).startDate(startDate).
                 proceduralTerm(proceduralTerm).isUnderWay(isUnderway).build();
-
+        criminalCaseMap.put(id, criminalCase);
     }
 
+    public Article enterArticle(){
+        System.out.println("Введите номер статьи");
+        Article newArticle = new Article();
+        LawRulesManager lawRulesManager = new LawRulesManager();
+        List<Article> articleArrayList = lawRulesManager.getArticleArrayList();
+        Scanner sc = new Scanner(System.in);
+        if (sc.hasNext()) {
+            String number = sc.nextLine();
+            for (Article article : articleArrayList) {
+                if(number.equals(article.getNumber())){
+                    Article currentArticle = article;
+                    newArticle.setNumber(article.getNumber());
+                    sc.close();
+                    System.out.println("Введите номер части");
+                    sc = new Scanner(System.in);
+                    if (sc.hasNext()) {
+                        number = sc.nextLine();
+                        if(currentArticle.getParts().contains(number)){
+                            Part newPart = new Part();
+                            newPart = currentArticle.getPart(number);
+                            sc.close();
+                            System.out.println("Введите пункт");
+                            sc = new Scanner(System.in);
+                            if (sc.hasNext()) {
+                                number = sc.nextLine();
+                                if (newPart.getParagraphs().contains())
+                            }
+                    break;
+                }
+            }
+
+
+        } else {
+            System.out.println("Такой статьи не существует");
+        }
+
+        } else {
+            System.out.println("Такой статьи не существует");
+        }
+        return null;
+    }
+
+
     @Override
-    public void deleteCase(String caseId) {
+    public void deleteCase(long caseId) {
         criminalCaseMap.remove(caseId);
     }
 
     @Override
-    public void printCase(String caseId) {
+    public void printCase(long caseId) {
 
     }
 
@@ -47,7 +92,7 @@ public class InMemoryCriminalCaseManager implements CriminalCaseManager{
     }
 
     @Override
-    public CriminalCase getCaseById(String caseId) {
+    public CriminalCase getCaseById(long caseId) {
         return null;
     }
 

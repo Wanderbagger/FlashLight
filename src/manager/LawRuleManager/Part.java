@@ -19,4 +19,8 @@ public class Part extends LawRule{
             System.out.println(paragraph);
         }
     }
+
+    public List<Paragraph> getParagraphs() {
+        return paragraphs;
+    }
 }
