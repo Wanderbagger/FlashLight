@@ -1,13 +1,12 @@
 package manager.CriminalCaseManager;
 
-import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecision;
 import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecisions;
+import manager.CriminalCaseManager.SubjectManager.Suspect;
+import manager.CriminalCaseManager.SubjectManager.Victim;
 import manager.LawRuleManager.Article;
 import manager.investigatorManager.Investigator;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 public class CriminalCase {
     private Investigator currentInvestigator; // текущий следователь по делу

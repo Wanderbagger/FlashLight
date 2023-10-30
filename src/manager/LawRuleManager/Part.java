@@ -23,4 +23,9 @@ public class Part extends LawRule{
     public List<Paragraph> getParagraphs() {
         return paragraphs;
     }
+
+    public void setParagraphs(List<Paragraph> paragraphs) {
+        this.paragraphs = paragraphs;
+    }
+
 }

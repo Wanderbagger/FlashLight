@@ -1,5 +1,6 @@
 package manager;
 
+import manager.LawRuleManager.LawRulesManager;
 import manager.investigatorManager.InvestigatorManager;
 
 import java.util.Scanner;
@@ -7,6 +8,7 @@ import java.util.Scanner;
 public class MenuManager {
     public void start() {
         InvestigatorManager investigatorManager = new InvestigatorManager();
+        LawRulesManager lawRulesManager = new LawRulesManager();
         while (true) {
 
             System.out.println("Что вы хотите сделать?");
@@ -20,7 +22,9 @@ public class MenuManager {
                 int number = sc.nextInt();
                 if (number == 1) {
                     System.out.println("ВОЗБУЖДЕНИЕ УГОЛОВНОГО ДЕЛА");
+                    lawRulesManager.getCurrentArticle();
                 } else if (number == 2) {
+
                     System.out.println("НОВЫЕ ДЕЙСТВИЯ");
                 } else if (number == 3) {
                     System.out.println("ИНФОРМАЦИЯ");

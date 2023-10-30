@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class LawRulesManager {
@@ -151,5 +152,62 @@ public class LawRulesManager {
     public List<Article> getArticleArrayList() {
         return articleArrayList;
     }
+
+    public Article getCurrentArticle() {
+        currentArticle = null;
+        currentPart = null;
+        List<Paragraph> paragraphs = new ArrayList<>();
+        LawRulesManager manager = new LawRulesManager();
+        Scanner scanner = new Scanner(System.in);
+        String number = "";
+        System.out.println("Введите номер статьи");
+        if (scanner.hasNext()) {
+            number = scanner.nextLine();
+            for (Article article : manager.getArticleArrayList()) {
+                if (article.getNumber().equals(number)) {
+                    currentArticle = article;
+                    break;
+                }
+            }
+        }
+        if (!currentArticle.getParts().equals(null) && !currentArticle.getParts().isEmpty()) {
+            System.out.println("Введите номер части выбранной статьи");
+            scanner = new Scanner(System.in);
+            if (scanner.hasNext()) {
+                number = scanner.nextLine();
+                for (Part part : currentArticle.getParts()) {
+                    if (part.getNumber().equals(number)) {
+                        currentPart = part;
+
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (!currentPart.getParagraphs().equals(null) && !currentPart.getParagraphs().isEmpty()) {
+            System.out.println("Введите пункт выбранной части");
+            scanner = new Scanner(System.in);
+
+            if (scanner.hasNext()) {
+
+                while (number != "0") {
+                    number = scanner.nextLine();
+                    for (Paragraph paragraph : currentPart.getParagraphs()) {
+                        if (paragraph.getNumber().equals(number)) {
+                            paragraphs.add(paragraph);
+                            System.out.println("Введите следующий пункт, если выбор параграфов закончен - введите 0");
+                        }
+                    }
+                }
+            }
+
+        }
+        scanner.close();
+        currentPart.setParagraphs(paragraphs);
+        currentArticle.setParts(currentPart);
+        return currentArticle;
+    }
+
 }
 

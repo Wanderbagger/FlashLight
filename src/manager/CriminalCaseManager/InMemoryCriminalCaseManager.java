@@ -1,10 +1,12 @@
 package manager.CriminalCaseManager;
 
+import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecision;
 import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecisions;
+import manager.CriminalCaseManager.SubjectManager.Suspect;
+import manager.CriminalCaseManager.SubjectManager.Victim;
 import manager.LawRuleManager.Article;
 import manager.LawRuleManager.Part;
 import manager.investigatorManager.Investigator;
-import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecision;
 import manager.LawRuleManager.LawRulesManager;
 
 import java.time.LocalDateTime;
@@ -32,49 +34,6 @@ public class InMemoryCriminalCaseManager implements CriminalCaseManager{
                 proceduralTerm(proceduralTerm).isUnderWay(isUnderway).build();
         criminalCaseMap.put(id, criminalCase);
     }
-
-    public Article enterArticle(){
-        System.out.println("Введите номер статьи");
-        Article newArticle = new Article();
-        LawRulesManager lawRulesManager = new LawRulesManager();
-        List<Article> articleArrayList = lawRulesManager.getArticleArrayList();
-        Scanner sc = new Scanner(System.in);
-        if (sc.hasNext()) {
-            String number = sc.nextLine();
-            for (Article article : articleArrayList) {
-                if(number.equals(article.getNumber())){
-                    Article currentArticle = article;
-                    newArticle.setNumber(article.getNumber());
-                    sc.close();
-                    System.out.println("Введите номер части");
-                    sc = new Scanner(System.in);
-                    if (sc.hasNext()) {
-                        number = sc.nextLine();
-                        if(currentArticle.getParts().contains(number)){
-                            Part newPart = new Part();
-                            newPart = currentArticle.getPart(number);
-                            sc.close();
-                            System.out.println("Введите пункт");
-                            sc = new Scanner(System.in);
-                            if (sc.hasNext()) {
-                                number = sc.nextLine();
-                                if (newPart.getParagraphs().contains())
-                            }
-                    break;
-                }
-            }
-
-
-        } else {
-            System.out.println("Такой статьи не существует");
-        }
-
-        } else {
-            System.out.println("Такой статьи не существует");
-        }
-        return null;
-    }
-
 
     @Override
     public void deleteCase(long caseId) {
@@ -140,6 +99,7 @@ public class InMemoryCriminalCaseManager implements CriminalCaseManager{
     public void deleteProceduralDecision(ProceduralDecision proceduralDecision) {
 
     }
+
 
     @Override
     public void addNewSuspect(Suspect suspect) {

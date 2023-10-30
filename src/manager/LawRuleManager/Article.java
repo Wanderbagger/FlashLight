@@ -37,4 +37,6 @@ public class Article extends LawRule{
         this.parts.add(part);
     }
 
+
+
 }

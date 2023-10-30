@@ -1,5 +1,7 @@
 package manager.CriminalCaseManager;
 
+import manager.CriminalCaseManager.SubjectManager.Suspect;
+import manager.CriminalCaseManager.SubjectManager.Victim;
 import manager.investigatorManager.Investigator;
 import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecision;
 
