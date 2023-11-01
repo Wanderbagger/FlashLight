@@ -30,12 +30,6 @@ public class LawRulesManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        for (Article article : articleArrayList) {
-            System.out.println(article);
-        }
-
-
     }
 
     private void recognize(String line) { // распознавание
@@ -143,7 +137,7 @@ public class LawRulesManager {
             return description.substring(0, description.length() - 3);
         } else if (description.endsWith(" -")) {
             return description.substring(0, description.length() - 2);
-        }else {
+        } else {
             return description;
         }
 
@@ -157,57 +151,71 @@ public class LawRulesManager {
         currentArticle = null;
         currentPart = null;
         List<Paragraph> paragraphs = new ArrayList<>();
-        LawRulesManager manager = new LawRulesManager();
         Scanner scanner = new Scanner(System.in);
         String number = "";
         System.out.println("Введите номер статьи");
-        if (scanner.hasNext()) {
-            number = scanner.nextLine();
-            for (Article article : manager.getArticleArrayList()) {
-                if (article.getNumber().equals(number)) {
-                    currentArticle = article;
-                    break;
-                }
-            }
-        }
-        if (!currentArticle.getParts().equals(null) && !currentArticle.getParts().isEmpty()) {
-            System.out.println("Введите номер части выбранной статьи");
-            scanner = new Scanner(System.in);
+        while (true) {
             if (scanner.hasNext()) {
                 number = scanner.nextLine();
-                for (Part part : currentArticle.getParts()) {
-                    if (part.getNumber().equals(number)) {
-                        currentPart = part;
-
+                for (Article article : getArticleArrayList()) {
+                    if (article.getNumber().equals(number)) {
+                        currentArticle = article;
+                        System.out.println("Выбрана статья № " + currentArticle.getNumber());
+                        break;
+                    }
+                    if (number.equals("0")) {
+                        System.out.println("Выход");
                         break;
                     }
                 }
+                if (!currentArticle.equals(null) || number.equals("0")) {
+                    break;
+                } else {
+                    System.out.println("Статья не найдена, повторите ввод, для выхода введите 0");
+                }
+                }
             }
-        }
 
-        if (!currentPart.getParagraphs().equals(null) && !currentPart.getParagraphs().isEmpty()) {
-            System.out.println("Введите пункт выбранной части");
-            scanner = new Scanner(System.in);
 
-            if (scanner.hasNext()) {
-
-                while (number != "0") {
+            if (!currentArticle.equals(null) && !currentArticle.getParts().isEmpty()) {
+                System.out.println("Введите номер части выбранной статьи");
+                scanner = new Scanner(System.in);
+                if (scanner.hasNext()) {
                     number = scanner.nextLine();
-                    for (Paragraph paragraph : currentPart.getParagraphs()) {
-                        if (paragraph.getNumber().equals(number)) {
-                            paragraphs.add(paragraph);
-                            System.out.println("Введите следующий пункт, если выбор параграфов закончен - введите 0");
+                    for (Part part : currentArticle.getParts()) {
+                        if (part.getNumber().equals(number)) {
+                            currentPart = part;
+
+                            break;
                         }
                     }
                 }
             }
 
+            if (!currentPart.getParagraphs().equals(null) && !currentPart.getParagraphs().isEmpty()) {
+                System.out.println("Введите пункт выбранной части");
+                scanner = new Scanner(System.in);
+
+                if (scanner.hasNext()) {
+
+                    while (number != "0") {
+                        number = scanner.nextLine();
+                        for (Paragraph paragraph : currentPart.getParagraphs()) {
+                            if (paragraph.getNumber().equals(number)) {
+                                paragraphs.add(paragraph);
+                                System.out.println("Введите следующий пункт, если выбор параграфов закончен - введите 0");
+                            }
+                        }
+                    }
+                }
+
+            }
+            scanner.close();
+            currentPart.setParagraphs(paragraphs);
+            currentArticle.setParts(currentPart);
+            return currentArticle;
         }
-        scanner.close();
-        currentPart.setParagraphs(paragraphs);
-        currentArticle.setParts(currentPart);
-        return currentArticle;
+
     }
 
-}
 

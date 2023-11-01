@@ -20,7 +20,5 @@ public abstract class LawRule {
         this.description = description;
     }
 
-    public LawRule getLawrule (String number){
-    return this;
-    }
+
 }

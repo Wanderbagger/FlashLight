@@ -9,6 +9,7 @@ public class MenuManager {
     public void start() {
         InvestigatorManager investigatorManager = new InvestigatorManager();
         LawRulesManager lawRulesManager = new LawRulesManager();
+        lawRulesManager.initializeCriminalCode();
         while (true) {
 
             System.out.println("Что вы хотите сделать?");
