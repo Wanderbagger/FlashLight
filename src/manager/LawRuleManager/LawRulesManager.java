@@ -22,7 +22,7 @@ public class LawRulesManager {
             for (int i = 1; i < lines.size(); i++) {
                 if (lines.get(i).length() > 1 && lines.size() > (i + 1)) {
                     if (!chooseType(lines.get(i)).equals(LineType.ERROR)) {
-                        recognize(lines.get(i));
+                        readLine(lines.get(i));
                     }
                 }
             }
@@ -30,24 +30,30 @@ public class LawRulesManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        for (Article art : articleArrayList) {
+            System.out.println(art);
+        }
     }
 
-    private void recognize(String line) { // распознавание
+    private void readLine(String line) { // распознавание
         LineType currentLineType = chooseType(line);
         if (currentLineType.equals(LineType.ARTICLE)) {
             if (previousLineType != null) {
                 addArticle(); // статья добавляется только в начале распознавания следующей статьи в кодекс или по завершении всей процедуры
             }
-            recognizeArticle(line);
+            currentArticle = new Article();
+            currentArticle = currentArticle.recognize(line);
         } else if (currentLineType.equals(LineType.PART)) { // добавление части
             addPart(); // добавление предыдущей части перед распознаванием следующей
             if (previousLineType.equals(LineType.NOTE)) { // исключение ошибочного распознавания примечания как части
                 return;
             }
-            recognizePart(line);
+            currentPart = new Part();
+            currentPart = currentPart.recognize(line);
         } else if (currentLineType.equals(LineType.PARAGRAPH)) {
             addParagraph(); // добавление параграфа перед распознаванием предыдущего
-            recognizeParagraph(line);
+            currentParagraph = new Paragraph();
+            currentParagraph = currentParagraph.recognize(line);
         } else if (currentLineType.equals(LineType.NOTE)) {
             addPart(); // при обнаружении примечания - добавить часть
         }
@@ -93,65 +99,16 @@ public class LawRulesManager {
         return LineType.ERROR;
     }
 
-    private void recognizeArticle(String line) {
-        Article article = new Article();
-        if (line.charAt(11) == ' ') {
-            article.setNumber(line.substring(7, 10));
-            article.setDescription(cutDescription(line.substring(11)));
-        } else if (Character.isDigit(line.charAt(11))) {
-            article.setNumber(line.substring(7, 12));
-            article.setDescription(cutDescription(line.substring(13)));
-        }
-        currentArticle = article;
-    }
-
-    private void recognizePart(String line) {
-        Part part = new Part();
-        if (Character.isDigit(line.charAt(0)) && line.charAt(1) == '.' && line.charAt(2) == ' ') {
-            part.setNumber(line.substring(0, 1));
-            part.setDescription(cutDescription(line.substring(3)));
-        } else if (Character.isDigit(line.charAt(0)) && line.charAt(1) == '.' && Character.isDigit(line.charAt(2)) && line.charAt(3) == '.') {
-            part.setNumber(line.substring(0, 3));
-            part.setDescription(cutDescription(line.substring(5)));
-        }
-        currentPart = part;
-    }
-
-    private void recognizeParagraph(String line) { // распознавание параграфа
-        Paragraph paragraph = new Paragraph();
-        if (Character.isLetter(line.charAt(0)) && line.charAt(1) == ')') {
-            paragraph.setNumber(line.substring(0, 1));
-            paragraph.setDescription(cutDescription(line.substring(3)));
-        } else if (Character.isLetter(line.charAt(0)) && line.charAt(1) == '.') {
-            paragraph.setNumber(line.substring(0, 3));
-            paragraph.setDescription(cutDescription(line.substring(5)));
-        }
-        currentParagraph = paragraph;
-    }
-
-
-    private String cutDescription(String description) {
-        if (description.endsWith(";")) {
-            return description.substring(0, description.length() - 1);
-        } else if (description.endsWith(", -")) {
-            return description.substring(0, description.length() - 3);
-        } else if (description.endsWith(" -")) {
-            return description.substring(0, description.length() - 2);
-        } else {
-            return description;
-        }
-
-    }
-
     public List<Article> getArticleArrayList() {
         return articleArrayList;
     }
 
     public Article getCurrentArticle() {
-        currentArticle = null;
-        currentPart = null;
+        currentArticle = new Article();
+        currentPart = new Part();
         List<Paragraph> paragraphs = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
+
         String number = "";
         System.out.println("Введите номер статьи");
         while (true) {
@@ -172,6 +129,7 @@ public class LawRulesManager {
                     break;
                 } else {
                     System.out.println("Статья не найдена, повторите ввод, для выхода введите 0");
+                    scanner = new Scanner(System.in);
                 }
                 }
             }

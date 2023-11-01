@@ -37,6 +37,17 @@ public class Article extends LawRule{
         this.parts.add(part);
     }
 
+    @Override
+    public Article recognize(String line) {
+            Article article = new Article();
+            if (line.charAt(11) == ' ') {
+                article.setNumber(line.substring(7, 10));
+                article.setDescription(cutDescription(line.substring(11)));
+            } else if (Character.isDigit(line.charAt(11))) {
+                article.setNumber(line.substring(7, 12));
+                article.setDescription(cutDescription(line.substring(13)));
+            }
+            return article;
+        }
+    }
 
-
-}
