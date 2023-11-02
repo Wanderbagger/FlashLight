@@ -70,7 +70,7 @@ public class LawRulesManager {
     private void addPart() {
         addParagraph();
         if (currentPart != null) {
-            currentArticle.parts.add(currentPart);
+            currentArticle.setParts(currentPart);
         }
         currentPart = null; // обнуление значения после добавления распознанной части
     }
@@ -103,15 +103,58 @@ public class LawRulesManager {
         return articleArrayList;
     }
 
+    public void chooseArticle() {
+        String number = "";
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите номер статьи");
+        if (scanner.hasNext()) {
+            number = scanner.nextLine();
+            for (Article article : getArticleArrayList()) {
+                if (article.getNumber().equals(number)) {
+                    System.out.println("Выбрана статья № " + article.getNumber());
+                    currentArticle = article;
+                    if(!currentArticle.getParts().isEmpty()){
+                        choosePart();
+                        System.out.println("Выбрана статья № " + currentArticle.getNumber() + " часть " + currentArticle.getPart().getNumber());
+                    }
+                    break;
+                }
+            }
+            System.out.println("Произошла ошибка, повторите ввод");
+        }
+
+    }
+
+    public void choosePart() {
+        String number = "";
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите номер части выбранной статьи");
+        if (scanner.hasNext()) {
+            number = scanner.nextLine();
+            for (Part part : currentArticle.getParts()) {
+                if (part.getNumber().equals(number)) {
+                    System.out.println("Выбрана часть № " + part.getNumber());
+                    currentArticle.setPart(part);
+                    break;
+
+                }
+            }
+            System.out.println("такой части нет в выбранной статье");
+        }
+    }
+
+
+   /*
     public Article getCurrentArticle() {
         currentArticle = new Article();
         currentPart = new Part();
         List<Paragraph> paragraphs = new ArrayList<>();
-        Scanner scanner = new Scanner(System.in);
+
 
         String number = "";
         System.out.println("Введите номер статьи");
         while (true) {
+            Scanner scanner = new Scanner(System.in);
             if (scanner.hasNext()) {
                 number = scanner.nextLine();
                 for (Article article : getArticleArrayList()) {
@@ -173,7 +216,8 @@ public class LawRulesManager {
             currentArticle.setParts(currentPart);
             return currentArticle;
         }
-
+*/
     }
+
 
 

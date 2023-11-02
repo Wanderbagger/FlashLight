@@ -4,7 +4,8 @@ import java.util.ArrayList;
 
 public class Article extends LawRule{
 
-    protected ArrayList <Part> parts = new ArrayList<>();
+    private ArrayList <Part> parts = new ArrayList<>();
+    private Part part = new Part();
 
     @Override
     public String toString() {
@@ -23,17 +24,15 @@ public class Article extends LawRule{
         return parts;
     }
 
-    public Part getPart(String number){
-        for (Part part : parts) {
-            if(part.getNumber().equals(number)){
-                return part;
-            }
-        }
-        return null;
+    public Part getPart() {
+        return part;
+    }
+
+    public void setPart(Part part) {
+        this.part = part;
     }
 
     public void setParts(Part part) {
-        this.parts.clear();
         this.parts.add(part);
     }
 

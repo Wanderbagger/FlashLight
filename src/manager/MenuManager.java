@@ -23,7 +23,7 @@ public class MenuManager {
                 int number = sc.nextInt();
                 if (number == 1) {
                     System.out.println("ВОЗБУЖДЕНИЕ УГОЛОВНОГО ДЕЛА");
-                    lawRulesManager.getCurrentArticle();
+                    lawRulesManager.chooseArticle();
                 } else if (number == 2) {
 
                     System.out.println("НОВЫЕ ДЕЙСТВИЯ");
