@@ -30,9 +30,13 @@ public class LawRulesManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        /*
+        //Блок печати УК после инициализации для проверки
         for (Article art : articleArrayList) {
             System.out.println(art);
         }
+
+         */
     }
 
     private void readLine(String line) { // распознавание
@@ -111,36 +115,73 @@ public class LawRulesManager {
             number = scanner.nextLine();
             for (Article article : getArticleArrayList()) {
                 if (article.getNumber().equals(number)) {
-                    System.out.println("Выбрана статья № " + article.getNumber());
+                    System.out.println("Выбрана статья № " + article);
                     currentArticle = article;
                     if(!currentArticle.getParts().isEmpty()){
                         choosePart();
-                        System.out.println("Выбрана статья № " + currentArticle.getNumber() + " часть " + currentArticle.getPart().getNumber());
                     }
                     break;
                 }
             }
             System.out.println("Произошла ошибка, повторите ввод");
         }
-
+        System.out.println("Выбрана " + currentArticle);
     }
 
     public void choosePart() {
         String number = "";
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите номер части выбранной статьи");
+        System.out.println("Доступные к выбору части: ");
+        for (Part part : currentArticle.getParts()) {
+            System.out.println(part.getNumber());
+        }
         if (scanner.hasNext()) {
             number = scanner.nextLine();
             for (Part part : currentArticle.getParts()) {
                 if (part.getNumber().equals(number)) {
-                    System.out.println("Выбрана часть № " + part.getNumber());
-                    currentArticle.setPart(part);
+                    currentPart = part;
+                    System.out.println("Выбрана часть № " + currentPart);
+                    if (!part.getParagraphs().isEmpty()){
+                        chooseParagraph();
+                    } else {
+                        System.out.println("Ввод " + currentArticle);
+                    }
                     break;
-
                 }
             }
             System.out.println("такой части нет в выбранной статье");
         }
+    }
+
+    public void chooseParagraph() {
+        List<Paragraph>paragraphs = new ArrayList<>();
+        String number = "";
+        System.out.println("Введите пункт части выбранной статьи");
+        System.out.println("Доступные к выбору пункты: ");
+        for (Paragraph paragraph : currentPart.getParagraphs()) {
+            System.out.println(paragraph.getNumber());
+        }
+
+        while (!number.equals("0")){
+            Scanner scanner = new Scanner(System.in);
+            if (scanner.hasNext()) {
+                number = scanner.nextLine();
+                for (Paragraph paragraph : currentPart.getParagraphs()) {
+                    if (paragraph.getNumber().equals(number)) {
+
+                        paragraphs.add(paragraph);
+                        System.out.println("Выбраны пункты " + paragraphs);
+                        System.out.println("Введите еще один пункт или введите 0 для выхода");
+                        break;
+                    }
+                }
+
+
+            }
+        }
+        currentPart.setParagraphs(paragraphs);
+        currentArticle.setPart(currentPart);
     }
 
 

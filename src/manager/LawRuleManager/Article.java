@@ -9,17 +9,24 @@ public class Article extends LawRule{
 
     @Override
     public String toString() {
-        printArticle();
-        return "";
+        String article = "Статья № " + getNumber() + " (" + getDescription().trim() + ")";
+        if (!part.equals(null)){
+            article += " " + part.toString();
+        }
+        if (!this.part.getParagraphs().isEmpty()){
+            article += " " + part.getParagraphs().toString();
+        }
+        return article;
     }
-
+/*
+// Запасной метод для проверки инициализации УК
     public void printArticle(){
         System.out.println("Article{" + '\'' + "number='" + getNumber() + "'" + '\n' + "description='" + getDescription() + "'" + '\n');
         for (Part part : parts) {
             System.out.println(part);
         }
     }
-
+*/
     public ArrayList<Part> getParts() {
         return parts;
     }

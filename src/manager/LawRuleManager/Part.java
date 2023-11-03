@@ -10,17 +10,17 @@ public class Part extends LawRule{
 
     @Override
     public String toString() {
-        printParagraph();
-        return "";
+        return "Часть " + getNumber() + " (" + getDescription() + ")";
     }
-
+/*
+Печать для проверки при инициализации УК
     public void printParagraph(){
         System.out.println("Part " + "number='" + getNumber() + '\'' + ", description='" + getDescription() + '\'' );
         for (Paragraph paragraph : paragraphs) {
             System.out.println(paragraph);
         }
     }
-
+*/
     public List<Paragraph> getParagraphs() {
         return paragraphs;
     }
