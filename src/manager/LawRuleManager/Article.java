@@ -1,12 +1,11 @@
 package manager.LawRuleManager;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 public class Article extends LawRule{
 
-    private final Set<Part> parts = new HashSet<>();
+    private final List <Part> parts = new ArrayList<>();
     private Part part = new Part();
 
     @Override
@@ -29,7 +28,7 @@ public class Article extends LawRule{
             }
         }
     */
-    public Set<Part> getParts() {
+    public List<Part> getParts() {
         return parts;
     }
 

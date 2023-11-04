@@ -1,5 +1,7 @@
 package manager.investigatorManager;
 
+import java.util.Objects;
+
 public class Investigator {
     private String name; // ФИО следователя
     private InvestigatorPosition position;
@@ -34,12 +36,7 @@ public class Investigator {
 
     @Override
     public String toString() {
-        return "Investigator{" +
-                "name='" + name + '\'' +
-                ", position=" + position +
-                ", rank=" + rank +
-                ", department=" + department +
-                '}';
+        return position + " " + department.getTitle() + " " + rank + " " + name;
     }
 
     public Investigator(String name, InvestigatorPosition position, InvestigatorRank rank, Department department) {
@@ -48,4 +45,19 @@ public class Investigator {
         this.rank = rank;
         this.department = department;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Investigator that = (Investigator) o;
+        return Objects.equals(name, that.name) && position == that.position && rank == that.rank && department == that.department;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, position, rank, department);
+    }
 }
+
+

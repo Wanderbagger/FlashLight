@@ -17,11 +17,10 @@ public class InvestigatorManager {
                 if(investigator.getName().startsWith(name)){ // проверка наличия следователя в базе
                     System.out.println("Следователь " + investigator.getName() + " найден в базе");
                     return investigator;
-
                 }
             }
             System.out.println("Следователь не найден, необходимо зарегистрироваться");
-            investigators.add(registration());
+            return registration();
         }
         System.out.println(currentInvestigator);
         return currentInvestigator;
@@ -72,6 +71,7 @@ public class InvestigatorManager {
             System.out.println("Неверная команда, повторите ввод");
         }
         if(investigator.getName() != null && investigator.getRank() != null && investigator.getDepartment() != null && investigator.getPosition()!=null) {
+            investigators.add(investigator);
             System.out.println(investigators);
             return investigator;
         }
