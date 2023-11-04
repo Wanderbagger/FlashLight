@@ -4,9 +4,7 @@ package manager.LawRuleManager;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class LawRulesManager {
@@ -158,7 +156,7 @@ public class LawRulesManager {
 
     public void chooseParagraph() {
         Scanner scanner = new Scanner(System.in);
-        List<Paragraph>paragraphs = new ArrayList<>();
+        Set<Paragraph> paragraphs = new HashSet<>();
         String number = "";
         System.out.println("Введите пункт части выбранной статьи");
         System.out.println("Доступные к выбору пункты: ");
@@ -183,6 +181,3 @@ public class LawRulesManager {
         scanner.close();
     }
 }
-
-
-

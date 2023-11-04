@@ -2,11 +2,13 @@ package manager.LawRuleManager;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Part extends LawRule{
 
-    protected List<Paragraph> paragraphs = new ArrayList<>();
+    protected Set<Paragraph> paragraphs = new HashSet<>();
 
     @Override
     public String toString() {
@@ -21,11 +23,11 @@ public class Part extends LawRule{
         }
     }
 */
-    public List<Paragraph> getParagraphs() {
+    public Set<Paragraph> getParagraphs() {
         return paragraphs;
     }
 
-    public void setParagraphs(List<Paragraph> paragraphs) {
+    public void setParagraphs(Set<Paragraph> paragraphs) {
         this.paragraphs = paragraphs;
     }
 

@@ -1,16 +1,18 @@
 package manager.LawRuleManager;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Article extends LawRule{
 
-    private ArrayList <Part> parts = new ArrayList<>();
+    private final Set<Part> parts = new HashSet<>();
     private Part part = new Part();
 
     @Override
     public String toString() {
         String article = "Статья № " + getNumber() + " (" + getDescription().trim() + ")";
-        if (!part.equals(null)){
+        if (part.getNumber() != null){
             article += " " + part.toString();
         }
         if (!this.part.getParagraphs().isEmpty()){
@@ -18,16 +20,16 @@ public class Article extends LawRule{
         }
         return article;
     }
-/*
-// Запасной метод для проверки инициализации УК
-    public void printArticle(){
-        System.out.println("Article{" + '\'' + "number='" + getNumber() + "'" + '\n' + "description='" + getDescription() + "'" + '\n');
-        for (Part part : parts) {
-            System.out.println(part);
+    /*
+    // Запасной метод для проверки инициализации УК
+        public void printArticle(){
+            System.out.println("Article{" + '\'' + "number='" + getNumber() + "'" + '\n' + "description='" + getDescription() + "'" + '\n');
+            for (Part part : parts) {
+                System.out.println(part);
+            }
         }
-    }
-*/
-    public ArrayList<Part> getParts() {
+    */
+    public Set<Part> getParts() {
         return parts;
     }
 
@@ -45,15 +47,14 @@ public class Article extends LawRule{
 
     @Override
     public Article recognize(String line) {
-            Article article = new Article();
-            if (line.charAt(11) == ' ') {
-                article.setNumber(line.substring(7, 10));
-                article.setDescription(cutDescription(line.substring(11)));
-            } else if (Character.isDigit(line.charAt(11))) {
-                article.setNumber(line.substring(7, 12));
-                article.setDescription(cutDescription(line.substring(13)));
-            }
-            return article;
+        Article article = new Article();
+        if (line.charAt(11) == ' ') {
+            article.setNumber(line.substring(7, 10));
+            article.setDescription(cutDescription(line.substring(11)));
+        } else if (Character.isDigit(line.charAt(11))) {
+            article.setNumber(line.substring(7, 12));
+            article.setDescription(cutDescription(line.substring(13)));
         }
+        return article;
     }
-
+}

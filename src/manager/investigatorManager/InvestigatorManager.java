@@ -1,11 +1,9 @@
 package manager.investigatorManager;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class InvestigatorManager {
-    List <Investigator> investigators = new ArrayList<>();
+    Set<Investigator> investigators = new HashSet<>();
 
     public Investigator chooseInvestigator(){
         investigators.add(new Investigator("Шляхов Юрий Олегович", InvestigatorPosition.INVESTIGATOR, InvestigatorRank.LIEUTENANT, Department.ARBAT_PI));
@@ -18,14 +16,12 @@ public class InvestigatorManager {
             for (Investigator investigator : investigators) {
                 if(investigator.getName().startsWith(name)){ // проверка наличия следователя в базе
                     System.out.println("Следователь " + investigator.getName() + " найден в базе");
-                    currentInvestigator = investigator;
+                    return investigator;
+
                 }
             }
-        }
-        if(currentInvestigator == null){
             System.out.println("Следователь не найден, необходимо зарегистрироваться");
-            currentInvestigator = registration();
-            investigators.add(currentInvestigator);
+            investigators.add(registration());
         }
         System.out.println(currentInvestigator);
         return currentInvestigator;
