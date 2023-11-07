@@ -105,7 +105,7 @@ public class LawRulesManager {
         return articleArrayList;
     }
 
-    public void chooseArticle() {
+    public Article chooseArticle() {
         currentArticle = null;
         String number;
         Scanner scanner = new Scanner(System.in);
@@ -126,6 +126,7 @@ public class LawRulesManager {
         }
         System.out.println("Выбрана " + currentArticle);
         scanner.close();
+        return currentArticle;
     }
 
     public void choosePart() {

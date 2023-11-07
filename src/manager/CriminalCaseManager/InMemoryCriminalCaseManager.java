@@ -18,7 +18,8 @@ public class InMemoryCriminalCaseManager implements CriminalCaseManager{
 
     @Override
     public void addNewCase(Investigator investigator) {
-        Article article = new Article();
+        LawRulesManager lawRulesManager = new LawRulesManager();
+        Article article = lawRulesManager.chooseArticle();
         Victim victim = new Victim();
         Suspect suspect = new Suspect();
         Expertise expertise = new Expertise();
