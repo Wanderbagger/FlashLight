@@ -1,6 +1,9 @@
 package manager;
 
+import manager.CriminalCaseManager.CriminalCaseManager;
+import manager.CriminalCaseManager.InMemoryCriminalCaseManager;
 import manager.LawRuleManager.LawRulesManager;
+import manager.investigatorManager.Investigator;
 import manager.investigatorManager.InvestigatorManager;
 
 import java.util.Scanner;
@@ -8,9 +11,11 @@ import java.util.Scanner;
 public class MenuManager {
     public void start() {
         InvestigatorManager investigatorManager = new InvestigatorManager();
+        CriminalCaseManager criminalCaseManager = new InMemoryCriminalCaseManager();
         LawRulesManager lawRulesManager = new LawRulesManager();
         lawRulesManager.initializeCriminalCode();
         Scanner sc = new Scanner(System.in);
+        Investigator currentInvestigator = null;
         while (true) {
             System.out.println("Что вы хотите сделать?");
             System.out.println("1 - возбуждение нового уголовного дела");
@@ -22,7 +27,10 @@ public class MenuManager {
                 int number = sc.nextInt();
                 if (number == 1) {
                     System.out.println("ВОЗБУЖДЕНИЕ УГОЛОВНОГО ДЕЛА");
-                    lawRulesManager.chooseArticle();
+                    if (currentInvestigator == null){
+                        investigatorManager.chooseInvestigator();
+                    }
+                    criminalCaseManager.addNewCase(currentInvestigator);
                     break;
                 } else if (number == 2) {
                     System.out.println("НОВЫЕ ДЕЙСТВИЯ");

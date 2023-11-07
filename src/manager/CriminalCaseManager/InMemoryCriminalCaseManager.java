@@ -2,6 +2,7 @@ package manager.CriminalCaseManager;
 
 import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecision;
 import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecisions;
+import manager.CriminalCaseManager.SubjectManager.SubjectManager;
 import manager.CriminalCaseManager.SubjectManager.Suspect;
 import manager.CriminalCaseManager.SubjectManager.Victim;
 import manager.LawRuleManager.Article;
@@ -19,8 +20,9 @@ public class InMemoryCriminalCaseManager implements CriminalCaseManager{
     @Override
     public void addNewCase(Investigator investigator) {
         LawRulesManager lawRulesManager = new LawRulesManager();
+        SubjectManager subjectManager = new SubjectManager();
         Article article = lawRulesManager.chooseArticle();
-        Victim victim = new Victim();
+        Victim victim = subjectManager.addVictim();
         Suspect suspect = new Suspect();
         Expertise expertise = new Expertise();
         ProceduralDecisions proceduralDecisions = ProceduralDecisions.INITIATION;
