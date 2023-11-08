@@ -22,9 +22,6 @@ public class InMemoryCriminalCaseManager implements CriminalCaseManager{
         LawRulesManager lawRulesManager = new LawRulesManager();
         SubjectManager subjectManager = new SubjectManager();
         Article article = lawRulesManager.chooseArticle();
-        if (article == null){
-            return;
-        }
         Victim victim = subjectManager.addVictim();
         Suspect suspect = subjectManager.addSuspect();
         Expertise expertise = new Expertise();

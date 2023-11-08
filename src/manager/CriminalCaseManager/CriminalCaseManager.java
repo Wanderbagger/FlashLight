@@ -51,4 +51,6 @@ public interface CriminalCaseManager {
     void deleteVictim(Victim victim);
 
     void editRegistrationNumber (RegistrationNumber registrationNumber);
+
+
 }

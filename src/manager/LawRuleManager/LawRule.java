@@ -25,6 +25,7 @@ public abstract class LawRule {
     }
 
     public String cutDescription(String description) {
+        description = description.trim();
         if (description.endsWith(";")) {
             return description.substring(0, description.length() - 1);
         } else if (description.endsWith(", -")) {
@@ -34,6 +35,5 @@ public abstract class LawRule {
         } else {
             return description;
         }
-
     }
 }

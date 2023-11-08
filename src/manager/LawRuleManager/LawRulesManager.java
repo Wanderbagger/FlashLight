@@ -9,12 +9,13 @@ import java.util.*;
 
 public class LawRulesManager {
     private final List<Article> articleArrayList = new ArrayList<>();
+    private final List <Article> criminalCode = initializeCriminalCode();
     private Article currentArticle;
     private Part currentPart;
     private Paragraph currentParagraph;
     private LineType previousLineType = LineType.ARTICLE;
 
-    public void initializeCriminalCode() {
+    public List<Article> initializeCriminalCode() {
         try {
             List<String> lines = Files.readAllLines(Paths.get("src/CriminalCode.txt")); // считываем все строки из файла по очереди
             for (int i = 1; i < lines.size(); i++) {
@@ -30,11 +31,12 @@ public class LawRulesManager {
         }
 
         //Блок печати УК после инициализации для проверки
+        /*
         for (Article art : articleArrayList) {
             System.out.println(art);
         }
-
-
+        */
+        return articleArrayList;
     }
 
     private void readLine(String line) { // распознавание
@@ -101,19 +103,19 @@ public class LawRulesManager {
         return LineType.ERROR;
     }
 
-    public List<Article> getArticleArrayList() {
-        return articleArrayList;
+    public List<Article> getCriminalCode() {
+        return criminalCode;
     }
 
     public Article chooseArticle() {
         currentArticle = null;
         String number;
-        Scanner scanner = new Scanner(System.in);
         System.out.println("Введите номер статьи");
-        number = scanner.nextLine();
+        Scanner scanner = new Scanner(System.in);
         if (scanner.hasNext()) {
-                for (Article article : getArticleArrayList()) {
-                    System.out.println(getArticleArrayList());
+            number = scanner.nextLine();
+                for (Article article : getCriminalCode()) {
+                    System.out.println(getCriminalCode());
                     if (article.getNumber().equals(number)) {
                         System.out.println("Выбрана статья № " + article);
                         currentArticle = article;
