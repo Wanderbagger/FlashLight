@@ -1,4 +1,8 @@
 package manager.CriminalCaseManager.SubjectManager;
 
-public class Suspect {
+import java.util.Scanner;
+
+public class Suspect extends Subject{
+
+
 }

@@ -1,8 +1,9 @@
 package manager.CriminalCaseManager.SubjectManager;
 
-public class Victim extends Subject{
+import java.util.Scanner;
 
-    public Victim(String surname, String firstName, String patronymic) {
-        super(surname, firstName, patronymic);
-    }
+public class Victim extends Subject {
+
+
+
 }

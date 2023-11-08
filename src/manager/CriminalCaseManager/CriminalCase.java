@@ -132,7 +132,7 @@ public class CriminalCase {
 
 
         public boolean validateCriminalCase(){
-                return !this.currentInvestigator.equals(null) &&
+                return this.currentInvestigator != null &&
                         this.id != 0 &&
                         !this.startDate.equals(null) &&
                         !this.article.equals(null) &&

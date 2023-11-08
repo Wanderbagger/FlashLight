@@ -9,11 +9,6 @@ public abstract class Subject {
         return surname.substring(0, 1).toUpperCase() + surname.substring(1) + " " + firstName.substring(0, 1).toUpperCase() + patronymic.substring(0, 1).toUpperCase();
     }
 
-    public Subject(String surname, String firstName, String patronymic) {
-        this.surname = surname;
-        this.firstName = firstName;
-        this.patronymic = patronymic;
-    }
 
     public String getSurname() {
         return surname;
@@ -38,4 +33,5 @@ public abstract class Subject {
     public void setPatronymic(String patronymic) {
         this.patronymic = patronymic;
     }
+
 }

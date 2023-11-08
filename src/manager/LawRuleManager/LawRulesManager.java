@@ -28,13 +28,13 @@ public class LawRulesManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*
+
         //Блок печати УК после инициализации для проверки
         for (Article art : articleArrayList) {
             System.out.println(art);
         }
 
-         */
+
     }
 
     private void readLine(String line) { // распознавание
@@ -110,23 +110,29 @@ public class LawRulesManager {
         String number;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите номер статьи");
+        number = scanner.nextLine();
         if (scanner.hasNext()) {
-            number = scanner.nextLine();
-            for (Article article : getArticleArrayList()) {
-                if (article.getNumber().equals(number)) {
-                    System.out.println("Выбрана статья № " + article);
-                    currentArticle = article;
-                    if(!currentArticle.getParts().isEmpty()){
-                        choosePart();
-                        currentArticle.setPart(currentPart);
+                for (Article article : getArticleArrayList()) {
+                    System.out.println(getArticleArrayList());
+                    if (article.getNumber().equals(number)) {
+                        System.out.println("Выбрана статья № " + article);
+                        currentArticle = article;
+                        if (!currentArticle.getParts().isEmpty()) {
+                            choosePart();
+                            currentArticle.setPart(currentPart);
+                        }
+                        break;
                     }
-                    break;
                 }
-            }
         }
-        System.out.println("Выбрана " + currentArticle);
-        scanner.close();
-        return currentArticle;
+        if (currentArticle != null){
+            System.out.println("Выбрана " + currentArticle);
+            return currentArticle;
+        }
+        else {
+            System.out.println("Ошибка ввода статьи");
+            return null;
+        }
     }
 
     public void choosePart() {
@@ -152,7 +158,6 @@ public class LawRulesManager {
                 }
             }
         }
-        scanner.close();
     }
 
     public void chooseParagraph() {
@@ -179,6 +184,5 @@ public class LawRulesManager {
 
         }
         currentPart.setParagraphs(paragraphs);
-        scanner.close();
     }
 }

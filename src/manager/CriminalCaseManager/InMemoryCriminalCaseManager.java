@@ -15,15 +15,18 @@ import java.util.*;
 
 public class InMemoryCriminalCaseManager implements CriminalCaseManager{
 
-    private Map<Long, CriminalCase> criminalCaseMap;
+    private Map<Long, CriminalCase> criminalCaseMap = new HashMap<>();
 
     @Override
     public void addNewCase(Investigator investigator) {
         LawRulesManager lawRulesManager = new LawRulesManager();
         SubjectManager subjectManager = new SubjectManager();
         Article article = lawRulesManager.chooseArticle();
+        if (article == null){
+            return;
+        }
         Victim victim = subjectManager.addVictim();
-        Suspect suspect = new Suspect();
+        Suspect suspect = subjectManager.addSuspect();
         Expertise expertise = new Expertise();
         ProceduralDecisions proceduralDecisions = ProceduralDecisions.INITIATION;
         String accusationPlot = "";
