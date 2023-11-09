@@ -115,7 +115,6 @@ public class LawRulesManager {
         if (scanner.hasNext()) {
             number = scanner.nextLine();
                 for (Article article : getCriminalCode()) {
-                    System.out.println(getCriminalCode());
                     if (article.getNumber().equals(number)) {
                         System.out.println("Выбрана статья № " + article);
                         currentArticle = article;
