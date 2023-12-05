@@ -38,7 +38,6 @@ public class Main {
                 } else if (number == 4) {
                     System.out.println("Выбрать следователя");
                     currentInvestigator = investigatorManager.chooseInvestigator();
-
                 } else if (number == 0) {
                     System.out.println("ВЫХОД");
                     break;

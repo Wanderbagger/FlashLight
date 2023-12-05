@@ -8,12 +8,13 @@ import java.util.*;
 
 
 public class LawRulesManager {
-    private final List<Article> articleArrayList = new ArrayList<>();
+    private List<Article> articleArrayList = new ArrayList<>();
     private final List <Article> criminalCode = initializeCriminalCode();
     private Article currentArticle;
     private Part currentPart;
     private Paragraph currentParagraph;
     private LineType previousLineType = LineType.ARTICLE;
+
 
     public List<Article> initializeCriminalCode() {
         try {
@@ -115,7 +116,6 @@ public class LawRulesManager {
         if (scanner.hasNext()) {
             number = scanner.nextLine();
                 for (Article article : getCriminalCode()) {
-                    System.out.println(getCriminalCode());
                     if (article.getNumber().equals(number)) {
                         System.out.println("Выбрана статья № " + article);
                         currentArticle = article;
