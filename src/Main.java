@@ -12,6 +12,7 @@ public class Main {
     public static void main(String[] args) {
         InvestigatorManager investigatorManager = new InvestigatorManager();
         CriminalCaseManager criminalCaseManager = new InMemoryCriminalCaseManager();
+
         Scanner sc = new Scanner(System.in);
         Investigator currentInvestigator = null;
         while (true) {
@@ -30,9 +31,11 @@ public class Main {
                         investigatorManager.chooseInvestigator();
                     }
                     criminalCaseManager.addNewCase(currentInvestigator);
+
                     break;
                 } else if (number == 2) {
                     System.out.println("НОВЫЕ ДЕЙСТВИЯ");
+
                 } else if (number == 3) {
                     System.out.println("ИНФОРМАЦИЯ");
                 } else if (number == 4) {

@@ -17,8 +17,21 @@ public class InMemoryCriminalCaseManager implements CriminalCaseManager{
 
     private Map<Long, CriminalCase> criminalCaseMap = new HashMap<>();
 
+    public String inputData(){
+
+        Scanner scanner = new Scanner(System.in);
+        String data = "";
+
+        if (scanner.hasNext()) {
+            data =  scanner.nextLine();
+        }
+        scanner.close();
+        return data;
+    }
+
     @Override
     public void addNewCase(Investigator investigator) {
+
         LawRulesManager lawRulesManager = new LawRulesManager();
         SubjectManager subjectManager = new SubjectManager();
         Article article = lawRulesManager.chooseArticle();
@@ -26,8 +39,8 @@ public class InMemoryCriminalCaseManager implements CriminalCaseManager{
         Suspect suspect = subjectManager.addSuspect();
         Expertise expertise = new Expertise();
         ProceduralDecisions proceduralDecisions = ProceduralDecisions.INITIATION;
-        String accusationPlot = "";
-        long id = 0;
+        String accusationPlot = inputData();
+        long id = 1111;
         LocalDateTime startDate = LocalDateTime.now();
         LocalDateTime proceduralTerm = startDate.plusMonths(2);
         boolean isUnderway = true;
@@ -37,6 +50,8 @@ public class InMemoryCriminalCaseManager implements CriminalCaseManager{
                 proceduralTerm(proceduralTerm).isUnderWay(isUnderway).build();
         criminalCaseMap.put(id, criminalCase);
     }
+
+
 
     @Override
     public void deleteCase(long caseId) {
