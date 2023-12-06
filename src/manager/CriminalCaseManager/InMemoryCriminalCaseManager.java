@@ -9,7 +9,9 @@ import manager.LawRuleManager.Article;
 import manager.investigatorManager.Investigator;
 import manager.LawRuleManager.LawRulesManager;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.*;
 
 public class InMemoryCriminalCaseManager implements CriminalCaseManager{
@@ -32,15 +34,13 @@ public class InMemoryCriminalCaseManager implements CriminalCaseManager{
     public void addNewCase(Investigator investigator) {
         LawRulesManager lawRulesManager = new LawRulesManager();
         SubjectManager subjectManager = new SubjectManager();
-
         Expertise expertise = new Expertise();
-        ProceduralDecisions proceduralDecisions = ProceduralDecisions.INITIATION;
         long id = 1111;
-        LocalDateTime startDate = LocalDateTime.now();
-        LocalDateTime proceduralTerm = startDate.plusMonths(2);
-        CriminalCase criminalCase = new CriminalCase.CriminalCaseBuilder().currentInvestigator(investigator).article(lawRulesManager.chooseArticle()).victim(subjectManager.addVictim()).
-                suspect(subjectManager.addSuspect()).expertise(expertise).proceduralDecisions(proceduralDecisions).accusationPlot(inputData()).id(id).startDate(startDate).
-                proceduralTerm(proceduralTerm).isUnderWay(true).build();
+
+        CriminalCase criminalCase = new CriminalCase.CriminalCaseBuilder().currentInvestigator(investigator).article(lawRulesManager.chooseArticle())
+                .victim(subjectManager.addVictim()).suspect(subjectManager.addSuspect()).expertise(expertise).proceduralDecisions(ProceduralDecisions.INITIATION)
+                .accusationPlot(inputData()).id(id).initiationDate(LocalDate.now()).initiationTime(LocalTime.now()).
+                proceduralTerm(LocalDate.now().plusMonths(2)).isUnderWay(true).build();
         criminalCaseMap.put(id, criminalCase);
     }
 
