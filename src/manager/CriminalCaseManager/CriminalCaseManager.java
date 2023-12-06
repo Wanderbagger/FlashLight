@@ -5,7 +5,7 @@ import manager.CriminalCaseManager.SubjectManager.Victim;
 import manager.investigatorManager.Investigator;
 import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecision;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public interface CriminalCaseManager {
 
@@ -24,7 +24,7 @@ public interface CriminalCaseManager {
 
     boolean load();
 
-    HashMap<String, CriminalCase> getActualCriminalCases();
+    Map<Long, CriminalCase> getActualCriminalCases();
 
     void addNewExpertise(Expertise expertise);
 

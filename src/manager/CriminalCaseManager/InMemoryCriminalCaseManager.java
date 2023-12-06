@@ -6,7 +6,6 @@ import manager.CriminalCaseManager.SubjectManager.SubjectManager;
 import manager.CriminalCaseManager.SubjectManager.Suspect;
 import manager.CriminalCaseManager.SubjectManager.Victim;
 import manager.LawRuleManager.Article;
-import manager.LawRuleManager.Part;
 import manager.investigatorManager.Investigator;
 import manager.LawRuleManager.LawRulesManager;
 
@@ -18,7 +17,7 @@ public class InMemoryCriminalCaseManager implements CriminalCaseManager{
     private Map<Long, CriminalCase> criminalCaseMap = new HashMap<>();
 
     public String inputData(){
-
+        System.out.println("Введите фабулу преступления");
         Scanner scanner = new Scanner(System.in);
         String data = "";
 
@@ -31,23 +30,17 @@ public class InMemoryCriminalCaseManager implements CriminalCaseManager{
 
     @Override
     public void addNewCase(Investigator investigator) {
-
         LawRulesManager lawRulesManager = new LawRulesManager();
         SubjectManager subjectManager = new SubjectManager();
-        Article article = lawRulesManager.chooseArticle();
-        Victim victim = subjectManager.addVictim();
-        Suspect suspect = subjectManager.addSuspect();
+
         Expertise expertise = new Expertise();
         ProceduralDecisions proceduralDecisions = ProceduralDecisions.INITIATION;
-        String accusationPlot = inputData();
         long id = 1111;
         LocalDateTime startDate = LocalDateTime.now();
         LocalDateTime proceduralTerm = startDate.plusMonths(2);
-        boolean isUnderway = true;
-
-        CriminalCase criminalCase = new CriminalCase.CriminalCaseBuilder().currentInvestigator(investigator).article(article).victim(victim).
-                suspect(suspect).expertise(expertise).proceduralDecisions(proceduralDecisions).accusationPlot(accusationPlot).id(id).startDate(startDate).
-                proceduralTerm(proceduralTerm).isUnderWay(isUnderway).build();
+        CriminalCase criminalCase = new CriminalCase.CriminalCaseBuilder().currentInvestigator(investigator).article(lawRulesManager.chooseArticle()).victim(subjectManager.addVictim()).
+                suspect(subjectManager.addSuspect()).expertise(expertise).proceduralDecisions(proceduralDecisions).accusationPlot(inputData()).id(id).startDate(startDate).
+                proceduralTerm(proceduralTerm).isUnderWay(true).build();
         criminalCaseMap.put(id, criminalCase);
     }
 
@@ -84,8 +77,8 @@ public class InMemoryCriminalCaseManager implements CriminalCaseManager{
     }
 
     @Override
-    public HashMap<String, CriminalCase> getActualCriminalCases() {
-        return null;
+    public Map<Long, CriminalCase> getActualCriminalCases() {
+        return criminalCaseMap;
     }
 
     @Override

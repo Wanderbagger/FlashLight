@@ -9,6 +9,14 @@ public abstract class Subject {
         return surname.substring(0, 1).toUpperCase() + surname.substring(1) + " " + firstName.substring(0, 1).toUpperCase() + patronymic.substring(0, 1).toUpperCase();
     }
 
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "surname='" + surname + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                '}';
+    }
 
     public String getSurname() {
         return surname;

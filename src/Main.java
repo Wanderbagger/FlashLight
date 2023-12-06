@@ -28,10 +28,10 @@ public class Main {
                     System.out.println("ВОЗБУЖДЕНИЕ УГОЛОВНОГО ДЕЛА");
                     if (currentInvestigator == null){
                         System.out.println("Следователь не выбран, необходимо выбрать следователя или пройти регистрацию");
-                        investigatorManager.chooseInvestigator();
+                        currentInvestigator = investigatorManager.chooseInvestigator();
                     }
                     criminalCaseManager.addNewCase(currentInvestigator);
-
+                    System.out.println(criminalCaseManager.getActualCriminalCases());
                     break;
                 } else if (number == 2) {
                     System.out.println("НОВЫЕ ДЕЙСТВИЯ");

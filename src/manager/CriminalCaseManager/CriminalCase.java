@@ -36,28 +36,30 @@ public class CriminalCase {
             }
             this.currentInvestigator = criminalCaseBuilder.currentInvestigator;
             this.id = criminalCaseBuilder.id;
+            this.victim = criminalCaseBuilder.victim;
+            this.suspect = criminalCaseBuilder.suspect;
             this.startDate = criminalCaseBuilder.startDate;
             this.article = criminalCaseBuilder.article;
             this.accusationPlot = criminalCaseBuilder.accusationPlot;
             this.proceduralDecision = ProceduralDecisions.INITIATION;
+            this.proceduralTerm = criminalCaseBuilder.proceduralTerm;
             this.isUnderway = true;
         }
 
 
     @Override
     public String toString() {
-        return "CriminalCase{" +
-                "currentInvestigator=" + currentInvestigator +
-                ", article=" + article +
-                ", victim=" + victim +
-                ", suspect=" + suspect +
-                ", expertise=" + expertise +
-                ", proceduralDecision=" + proceduralDecision +
-                ", accusationPlot='" + accusationPlot + '\'' +
-                ", id=" + id +
-                ", startDate=" + startDate +
-                ", proceduralTerm=" + proceduralTerm +
-                ", isUnderway=" + isUnderway +
+        return  "Уголовное дело № " + id + '\n' +
+                "следователь - " + currentInvestigator + '\n' +
+                "статья  - " + article + '\n' +
+                "потерпевший - " + victim + '\n' +
+                "фигурант - " + suspect + '\n' +
+                "экспертиза - " + expertise + '\n' +
+                "последнее процессуальное решение - " + proceduralDecision + '\n' +
+                "фабула дела - " + accusationPlot +  '\n' +
+                "дата возбуждения - " + startDate + '\n' +
+                "процессуальный срок  - " + proceduralTerm + '\n' +
+                "находится в производстве - " + isUnderway +
                 '}';
     }
 
@@ -78,7 +80,24 @@ public class CriminalCase {
                 super();
             }
 
-            public CriminalCaseBuilder currentInvestigator(Investigator currentInvestigator) {
+        @Override
+        public String toString() {
+            return "CriminalCaseBuilder{" +
+                    "currentInvestigator=" + currentInvestigator +
+                    ", article=" + article +
+                    ", victim=" + victim +
+                    ", suspect=" + suspect +
+                    ", expertise=" + expertise +
+                    ", proceduralDecisions=" + proceduralDecisions +
+                    ", accusationPlot='" + accusationPlot + '\'' +
+                    ", id=" + id +
+                    ", startDate=" + startDate +
+                    ", proceduralTerm=" + proceduralTerm +
+                    ", isUnderway=" + isUnderway +
+                    '}';
+        }
+
+        public CriminalCaseBuilder currentInvestigator(Investigator currentInvestigator) {
                 this.currentInvestigator = currentInvestigator;
                 return this;
             }
@@ -134,11 +153,11 @@ public class CriminalCase {
 
 
         public boolean validateCriminalCase(){
-                return this.currentInvestigator != null &&
+            return this.currentInvestigator != null &&
                         this.id != 0 &&
-                        !this.startDate.equals(null) &&
-                        !this.article.equals(null) &&
-                        !this.accusationPlot.equals(null);
+                        this.startDate != null &&
+                        this.article != null &&
+                        this.accusationPlot != null;
             }
 
             public CriminalCase build() {
