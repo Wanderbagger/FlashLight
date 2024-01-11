@@ -1,16 +1,14 @@
 package manager.CriminalCaseManager;
 
 import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecision;
-import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecisions;
+import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDesicionManager;
 import manager.CriminalCaseManager.SubjectManager.SubjectManager;
 import manager.CriminalCaseManager.SubjectManager.Suspect;
 import manager.CriminalCaseManager.SubjectManager.Victim;
-import manager.LawRuleManager.Article;
 import manager.investigatorManager.Investigator;
 import manager.LawRuleManager.LawRulesManager;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.*;
 
@@ -34,13 +32,13 @@ public class InMemoryCriminalCaseManager implements CriminalCaseManager{
     public void addNewCase(Investigator investigator) {
         LawRulesManager lawRulesManager = new LawRulesManager();
         SubjectManager subjectManager = new SubjectManager();
+        ProceduralDesicionManager proceduralDesicionManager = new ProceduralDesicionManager();
         Expertise expertise = new Expertise();
         long id = 1111;
 
         CriminalCase criminalCase = new CriminalCase.CriminalCaseBuilder().currentInvestigator(investigator).article(lawRulesManager.chooseArticle())
-                .victim(subjectManager.addVictim()).suspect(subjectManager.addSuspect()).expertise(expertise).proceduralDecisions(ProceduralDecisions.INITIATION)
-                .accusationPlot(inputData()).id(id).initiationDate(LocalDate.now()).initiationTime(LocalTime.now()).
-                proceduralTerm(LocalDate.now().plusMonths(2)).isUnderWay(true).build();
+                .victim(subjectManager.addVictim()).suspect(subjectManager.addSuspect()).expertise(expertise).initiation(proceduralDesicionManager.initiationInput())
+                .accusationPlot(inputData()).id(id).proceduralTerm(LocalDate.now().plusMonths(2)).isUnderWay(true).build();
         criminalCaseMap.put(id, criminalCase);
     }
 

@@ -32,11 +32,11 @@ public class LawRulesManager {
         }
 
         //Блок печати УК после инициализации для проверки
-        /*
+/*
         for (Article art : articleArrayList) {
             System.out.println(art);
         }
-        */
+*/
         return articleArrayList;
     }
 

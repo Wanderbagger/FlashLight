@@ -1,13 +1,15 @@
 package manager.CriminalCaseManager;
 
-import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecisions;
+import manager.CriminalCaseManager.ProceduralDesicionManager.CriminalCaseInitiation;
+import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecision;
 import manager.CriminalCaseManager.SubjectManager.Suspect;
 import manager.CriminalCaseManager.SubjectManager.Victim;
 import manager.LawRuleManager.Article;
 import manager.investigatorManager.Investigator;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CriminalCase {
     private Investigator currentInvestigator; // текущий следователь по делу
@@ -15,10 +17,9 @@ public class CriminalCase {
     private Victim victim; // потерпевшие по уголовному делу
     private Suspect suspect; // фигуранты по уголовному делу
     private Expertise expertise; // экспертизы по уголовному делу
-    private ProceduralDecisions proceduralDecision; // принятые процессуальные решения по делу;
+    private CriminalCaseInitiation initiation; // возбуждение по уголовному делу в отдельном поле, потому что должно быть в каждом деле
+    private Set<ProceduralDecision> proceduralDecision = new HashSet<>(); // принятые процессуальные решения по делу;
     private String accusationPlot; // фабула уголовного дела
-    private final LocalDate initiationDate; // дата возбуждения уголовного дела
-    private final LocalTime initiationTime;
     private LocalDate proceduralTerm; // процессуальный срок по делу
     private boolean isUnderway = false; // ведется расследование
 
@@ -26,7 +27,7 @@ public class CriminalCase {
             if (criminalCaseBuilder == null) {
                 throw new IllegalArgumentException("Ошибка, отсутствует Builder");
             } if (criminalCaseBuilder.currentInvestigator == null ||
-                            criminalCaseBuilder.initiationDate == null ||
+                            criminalCaseBuilder.initiation == null ||
                             criminalCaseBuilder.article == null ||
                             criminalCaseBuilder.accusationPlot == null)
             {
@@ -35,11 +36,9 @@ public class CriminalCase {
             this.currentInvestigator = criminalCaseBuilder.currentInvestigator;
             this.victim = criminalCaseBuilder.victim;
             this.suspect = criminalCaseBuilder.suspect;
-            this.initiationDate = criminalCaseBuilder.initiationDate;
-            this.initiationTime = criminalCaseBuilder.initiationTime;
+            this.initiation = criminalCaseBuilder.initiation;
             this.article = criminalCaseBuilder.article;
             this.accusationPlot = criminalCaseBuilder.accusationPlot;
-            this.proceduralDecision = ProceduralDecisions.INITIATION;
             this.proceduralTerm = criminalCaseBuilder.proceduralTerm;
             this.isUnderway = true;
         }
@@ -55,8 +54,8 @@ public class CriminalCase {
                 "экспертиза - " + expertise + '\n' +
                 "последнее процессуальное решение - " + proceduralDecision + '\n' +
                 "фабула дела - " + accusationPlot +  '\n' +
-                "дата возбуждения - " + initiationDate + '\n' +
-                "время возбуждения - " + initiationTime + '\n' +
+                "дата возбуждения - " + initiation.getInitiationDate() + '\n' +
+                "время возбуждения - " + initiation.getInitiationTime() + '\n' +
                 "процессуальный срок  - " + proceduralTerm + '\n' +
                 "находится в производстве - " + isUnderway +
                 '}';
@@ -68,10 +67,9 @@ public class CriminalCase {
             private Victim victim; // потерпевшие по уголовному делу
             private Suspect suspect; // фигуранты по уголовному делу
             private Expertise expertise; // экспертизы по уголовному делу
-            private ProceduralDecisions proceduralDecisions; // принятые процессуальные решения по делу;
+            private CriminalCaseInitiation initiation;
+            private Set<ProceduralDecision> proceduralDecisions = new HashSet<>(); // принятые процессуальные решения по делу;
             private String accusationPlot; // фабула уголовного дела
-            private LocalDate initiationDate; // дата возбуждения уголовного дела
-            private LocalTime initiationTime;
             private LocalDate proceduralTerm; // процессуальный срок по делу
             private boolean isUnderway = false; // ведется расследование
 
@@ -89,8 +87,8 @@ public class CriminalCase {
                     ", expertise=" + expertise +
                     ", proceduralDecisions=" + proceduralDecisions +
                     ", accusationPlot='" + accusationPlot + '\'' +
-                    ", initiationDate=" + initiationDate +
-                    ", initiationTime=" + initiationTime +
+                    ", initiationDate=" + initiation.getInitiationDate() +
+                    ", initiationTime=" + initiation.getInitiationTime() +
                     ", proceduralTerm=" + proceduralTerm +
                     ", isUnderway=" + isUnderway +
                     '}';
@@ -126,23 +124,15 @@ public class CriminalCase {
             return this;
         }
 
-            public CriminalCaseBuilder proceduralDecisions (ProceduralDecisions proceduralDecision) {
-                this.proceduralDecisions = proceduralDecision;
-                return this;
-            }
-
             public CriminalCaseBuilder id(long id){
                 return this;
             }
-        public CriminalCaseBuilder initiationDate(LocalDate initiationDate){
-            this.initiationDate = initiationDate;
+
+        public CriminalCaseBuilder initiation(CriminalCaseInitiation initiation){
+            this.initiation = initiation;
             return this;
         }
 
-        public CriminalCaseBuilder initiationTime(LocalTime initiationTime){
-            this.initiationTime = initiationTime;
-            return this;
-        }
 
         public CriminalCaseBuilder proceduralTerm(LocalDate proceduralTerm){
             this.proceduralTerm = proceduralTerm;
@@ -157,7 +147,7 @@ public class CriminalCase {
 
         public boolean validateCriminalCase(){
             return this.currentInvestigator != null &&
-                        this.initiationDate != null &&
+                        this.initiation.getInitiationDate() != null &&
                         this.article != null &&
                         this.accusationPlot != null;
             }
