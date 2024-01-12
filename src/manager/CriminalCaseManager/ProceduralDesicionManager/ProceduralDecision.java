@@ -9,4 +9,9 @@ public abstract class ProceduralDecision {
     Investigator investigator;
     String Place;
 
+public ProceduralDecision initiation(Investigator investigator){
+    return null;
+}
+
+
 }

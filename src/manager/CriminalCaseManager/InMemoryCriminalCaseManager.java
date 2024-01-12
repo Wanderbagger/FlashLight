@@ -1,5 +1,6 @@
 package manager.CriminalCaseManager;
 
+import manager.CriminalCaseManager.ProceduralDesicionManager.CriminalCaseInitiation;
 import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecision;
 import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDesicionManager;
 import manager.CriminalCaseManager.SubjectManager.SubjectManager;
@@ -32,12 +33,12 @@ public class InMemoryCriminalCaseManager implements CriminalCaseManager{
     public void addNewCase(Investigator investigator) {
         LawRulesManager lawRulesManager = new LawRulesManager();
         SubjectManager subjectManager = new SubjectManager();
-        ProceduralDesicionManager proceduralDesicionManager = new ProceduralDesicionManager();
+        CriminalCaseInitiation criminalCaseInitiation = new CriminalCaseInitiation();
         Expertise expertise = new Expertise();
         long id = 1111;
 
         CriminalCase criminalCase = new CriminalCase.CriminalCaseBuilder().currentInvestigator(investigator).article(lawRulesManager.chooseArticle())
-                .victim(subjectManager.addVictim()).suspect(subjectManager.addSuspect()).expertise(expertise).initiation(proceduralDesicionManager.initiationInput())
+                .victim(subjectManager.addVictim()).suspect(subjectManager.addSuspect()).expertise(expertise).initiation(criminalCaseInitiation.initiation(investigator))
                 .accusationPlot(inputData()).id(id).proceduralTerm(LocalDate.now().plusMonths(2)).isUnderWay(true).build();
         criminalCaseMap.put(id, criminalCase);
     }
