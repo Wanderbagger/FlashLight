@@ -141,8 +141,4 @@ public class InMemoryCriminalCaseManager implements CriminalCaseManager{
 
     }
 
-    @Override
-    public void editRegistrationNumber(RegistrationNumber registrationNumber) {
-
-    }
 }
