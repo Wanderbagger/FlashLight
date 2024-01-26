@@ -2,7 +2,6 @@ package manager.CriminalCaseManager;
 
 import manager.CriminalCaseManager.ProceduralDesicionManager.CriminalCaseInitiation;
 import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecision;
-import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDesicionManager;
 import manager.CriminalCaseManager.SubjectManager.SubjectManager;
 import manager.CriminalCaseManager.SubjectManager.Suspect;
 import manager.CriminalCaseManager.SubjectManager.Victim;
@@ -10,37 +9,48 @@ import manager.investigatorManager.Investigator;
 import manager.LawRuleManager.LawRulesManager;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.*;
 
 public class InMemoryCriminalCaseManager implements CriminalCaseManager{
 
     private Map<Long, CriminalCase> criminalCaseMap = new HashMap<>();
 
-    public String inputData(){
-        System.out.println("Введите фабулу преступления");
-        Scanner scanner = new Scanner(System.in);
+    public String inputStringData(String message, Scanner scanner){
+        System.out.println("Введите " + message);
         String data = "";
 
         if (scanner.hasNext()) {
             data =  scanner.nextLine();
         }
-        scanner.close();
+        return data;
+    }
+
+    public long inputLongData(String message, Scanner scanner){
+        System.out.println("Введите " + message);
+
+        long data = 0;
+
+        if (scanner.hasNextLong()) {
+            data =  scanner.nextLong();
+        }
+
         return data;
     }
 
     @Override
     public void addNewCase(Investigator investigator) {
+        Scanner scanner = new Scanner(System.in);
         LawRulesManager lawRulesManager = new LawRulesManager();
         SubjectManager subjectManager = new SubjectManager();
         CriminalCaseInitiation criminalCaseInitiation = new CriminalCaseInitiation();
         Expertise expertise = new Expertise();
-        long id = 1111;
+        long id = inputLongData("номер уголовного дела", scanner);
 
         CriminalCase criminalCase = new CriminalCase.CriminalCaseBuilder().currentInvestigator(investigator).article(lawRulesManager.chooseArticle())
                 .victim(subjectManager.addVictim()).suspect(subjectManager.addSuspect()).expertise(expertise).initiation(criminalCaseInitiation.initiation(investigator))
-                .accusationPlot(inputData()).id(id).proceduralTerm(LocalDate.now().plusMonths(2)).isUnderWay(true).build();
+                .accusationPlot(inputStringData("фабулу уголовного дела", scanner)).id(id).proceduralTerm(LocalDate.now().plusMonths(2)).isUnderWay(true).build();
         criminalCaseMap.put(id, criminalCase);
+        scanner.close();
     }
 
 

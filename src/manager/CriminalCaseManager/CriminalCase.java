@@ -129,7 +129,8 @@ public class CriminalCase {
             }
 
         public CriminalCaseBuilder initiation(CriminalCaseInitiation initiation){
-            this.initiation = initiation;
+                this.proceduralDecisions.add(initiation);
+                this.initiation = initiation;
             return this;
         }
 
