@@ -1,4 +1,4 @@
-package manager.CriminalCaseManager.SubjectManager;
+package manager.criminalCaseManager.subjectManager;
 
 public abstract class Subject {
     private String surname;

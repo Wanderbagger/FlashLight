@@ -1,9 +1,9 @@
-package manager.CriminalCaseManager;
+package manager.criminalCaseManager;
 
-import manager.CriminalCaseManager.SubjectManager.Suspect;
-import manager.CriminalCaseManager.SubjectManager.Victim;
+import manager.criminalCaseManager.subjectManager.Suspect;
+import manager.criminalCaseManager.subjectManager.Victim;
 import manager.investigatorManager.Investigator;
-import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecision;
+import manager.criminalCaseManager.proceduralDesicionManager.ProceduralDecision;
 
 import java.util.Map;
 

@@ -1,10 +1,10 @@
-package manager.CriminalCaseManager;
+package manager.criminalCaseManager;
 
-import manager.CriminalCaseManager.ProceduralDesicionManager.CriminalCaseInitiation;
-import manager.CriminalCaseManager.ProceduralDesicionManager.ProceduralDecision;
-import manager.CriminalCaseManager.SubjectManager.Suspect;
-import manager.CriminalCaseManager.SubjectManager.Victim;
-import manager.LawRuleManager.Article;
+import manager.criminalCaseManager.proceduralDesicionManager.CriminalCaseInitiation;
+import manager.criminalCaseManager.proceduralDesicionManager.ProceduralDecision;
+import manager.criminalCaseManager.subjectManager.Suspect;
+import manager.criminalCaseManager.subjectManager.Victim;
+import manager.lawRuleManager.Article;
 import manager.investigatorManager.Investigator;
 
 import java.time.LocalDate;

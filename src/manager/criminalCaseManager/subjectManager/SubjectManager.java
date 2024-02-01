@@ -1,4 +1,4 @@
-package manager.CriminalCaseManager.SubjectManager;
+package manager.criminalCaseManager.subjectManager;
 
 import java.util.Scanner;
 

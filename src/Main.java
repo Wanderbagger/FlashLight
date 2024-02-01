@@ -1,5 +1,5 @@
-import manager.CriminalCaseManager.CriminalCaseManager;
-import manager.CriminalCaseManager.InMemoryCriminalCaseManager;
+import manager.criminalCaseManager.CriminalCaseManager;
+import manager.criminalCaseManager.InMemoryCriminalCaseManager;
 import manager.investigatorManager.Investigator;
 import manager.investigatorManager.InvestigatorManager;
 

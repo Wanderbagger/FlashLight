@@ -1,4 +1,4 @@
-package manager.LawRuleManager;
+package manager.lawRuleManager;
 
 
 import java.io.IOException;

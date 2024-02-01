@@ -1,4 +1,4 @@
-package manager.CriminalCaseManager.ProceduralDesicionManager;
+package manager.criminalCaseManager.proceduralDesicionManager;
 
 import manager.investigatorManager.Investigator;
 
