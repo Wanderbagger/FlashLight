@@ -28,6 +28,11 @@ public class ParagraphTest extends Paragraph{
         Assertions.assertEquals(test.getDescription(), paragraph.getDescription());
     }
 
-
+    @Test
+    public void shouldReturnNull() {
+        paragraph = paragraph.recognize("__________________");
+        Assertions.assertNull(paragraph.getNumber());
+        Assertions.assertNull(paragraph.getDescription());
+    }
 
 }

@@ -31,7 +31,12 @@ public class PartTest extends Part{
         Assertions.assertEquals(testPart.getNumber(), part.getNumber());
         Assertions.assertEquals(testPart.getDescription(), part.getDescription());
     }
-
+    @Test
+    public void shouldReturnNull() {
+        part = part.recognize("__________________");
+        Assertions.assertNull(part.getNumber());
+        Assertions.assertNull(part.getDescription());
+    }
 }
 
 

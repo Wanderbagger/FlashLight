@@ -88,7 +88,7 @@ public class LawRulesManager {
         currentArticle = null; // обнуление значения после добавления
     }
 
-    private LineType chooseType(String line) { // распознавание следующей строки
+    public LineType chooseType(String line) { // распознавание следующей строки
         if (line.length() < 1) {
             return LineType.ERROR;
         }
